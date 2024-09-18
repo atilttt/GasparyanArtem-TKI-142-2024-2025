@@ -11,7 +11,7 @@ double getA(const double x, const double y, const double z);
  * @param x значение константы x
  * @param y значение константы y
  * @param z значение константы z
- * @return рассчитаное значение
+ * @return рассчитаное значение.
  */
 double getB(const double x, const double y, const double z);
 /* @brief точка входа в программу
