@@ -1,4 +1,10 @@
 #include <stdio.h>
+/**
+ * @brief расчитывает деление массы на дюйм
+ * @param inch значение константы inch
+ * @param x значение переменной x
+ * @return рассчитаное значение
+ */
 double result(const double inch, double x);
 int main(void) 
 { 
