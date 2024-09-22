@@ -5,23 +5,23 @@
  * @param x значение переменной x
  * @return рассчитаное значение
  */
-double result(const double inch, double x);
+double result(double x);
 /*
  * @brief вход в программу
  * @return 0 в случае успеха
  */
 int main(void) 
 { 
-    const double inch = 28.3;
     double x;
     printf("Введите вес в граммах:");
     scanf("%lf", &x);
-    printf("%lf", result(inch, x));
+    printf("%lf", result(x));
 
     return 0;
 }
 
-double result(const double inch, double x)
-{ 
+double result(double x)
+{
+    const double inch = 28.3; 
     return x / inch;
 }
