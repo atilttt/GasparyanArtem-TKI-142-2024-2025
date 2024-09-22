@@ -26,4 +26,4 @@ int main(void)
 double work(const int time, double I, double U)
 { 
     return U * I * time;
-}
+} 
