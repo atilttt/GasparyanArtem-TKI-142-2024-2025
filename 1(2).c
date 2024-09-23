@@ -1,11 +1,13 @@
 #include <stdio.h>
+
 /*
- * @brief расчитывает деление массы на дюйм
- * @param inch значение константы inch
- * @param x значение переменной x
- * @return рассчитаное значение
+ * @brief перевод значения веса в граммах в унции
+ * @param inch значение 1 унция
+ * @param x вес в граммах
+ * @return возвращает рассчитаное значение
  */
 double result(double x);
+
 /*
  * @brief вход в программу
  * @return 0 в случае успеха
@@ -22,6 +24,6 @@ int main(void)
 
 double result(double x)
 {
-    const double inch = 28.3; 
-    return x / inch;
+    const double unz = 28.3; 
+    return x / unz;
 }
