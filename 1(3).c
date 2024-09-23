@@ -1,29 +1,47 @@
-#include <stdio.h> 
+#include <stdio.h>
 /*
-* @brief расчитывает работу по формуле
-* @param time константа time
-* @param I переменная I - сила тока
-* @param U переменная U - напряжение
-* return возвращает рассчитанное значение
-*/
-double work(const int time, double I, double U);
-/*
- * @brief точка входа в программу
- * @return 0 в случае успеха
+ * @brief рассчитывает работу эл.тока по формуле
+ * @param I - сила тока
+ * @param U - напряжение
+ * @param time - время переведенное в секунды 
+ * return рассчитанное значение
  */
-int main(void) 
+double getA(const double time, double I, double U);
+
+/*
+ * @brief считывает вещественное число
+ * @return возвращает вещественное число
+ */
+double input();
+
+/*
+* @brief точка входу в прогамму
+* return 0 в случае успехa
+*/
+int main()
 { 
-    const int time = 1200.0;
-    double I; 
-    double U;
-    scanf("%lf", &I);
-    scanf("%lf", &U);
-    printf("%lf", work(time, I, U));
+    const double time = 20.0; 
+    puts("Введите значение силы тока");
+    double I = input(); 
+    puts("Введите значение напряжения");
+    double U = input(); 
+    printf("%lf", getA(time, I, U));
 
     return 0;
 }
 
-double work(const int time, double I, double U)
+double getA(const double time, double I, double U)
+{
+    return U * I * (time * 60);
+}
+
+double input() 
 { 
-    return U * I * time;
-} 
+    double value = 0.0;
+    int result = scanf("%lf", &value);
+    if (result != 2)
+    {
+        perror("Invalid input!");
+    }
+    return value;
+}
