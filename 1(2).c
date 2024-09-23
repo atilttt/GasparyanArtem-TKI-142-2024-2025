@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-/*
+/**
  * @brief перевод значения веса в граммах в унции
  * @param inch значение 1 унция
  * @param x вес в граммах
@@ -8,7 +8,7 @@
  */
 double result(double x);
 
-/*
+/**
  * @brief вход в программу
  * @return 0 в случае успеха
  */
