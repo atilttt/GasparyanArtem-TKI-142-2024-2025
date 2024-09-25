@@ -4,7 +4,7 @@
  * @param I - сила тока
  * @param U - напряжение
  * @param time - время переведенное в секунды 
- * return рассчитанное значение
+ * return рассчитанное значение работы силы тока
  */
 double getA(const double time, double I, double U);
 
@@ -38,10 +38,6 @@ double getA(const double time, double I, double U)
 double input() 
 { 
     double value = 0.0;
-    int result = scanf("%lf", &value);
-    if (result != 2)
-    {
-        perror("Invalid input!");
-    }
+    scanf("%lf", &value);
     return value;
 }
