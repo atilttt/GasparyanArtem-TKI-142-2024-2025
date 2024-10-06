@@ -1,86 +1,99 @@
-#include <stdio.h> 
+#include <stdio.h>
+#include <stdlib.h>
 #include <math.h>
-
-/*
-* @brief proverka проверка на отрицательные числа
-* @param x переменная x
-* @param y переменная y
-* return 1 в случае успеха(число > 0)
-* return 0 в случае, если число отрицательное
-*/
-int proverka(double x, double y);
-
-/*
- * @brief perimetr рассчитывает периметр
- * @param x переменная x
- * @param y переменная y
- * @return рассчитанное значение 
+/**
+ * @brief проверка получаемого значения
+ * @return возвращает проверенное число
  */
-double perimetr(double x, double y);
+double input();
 
-/*
- * @brief sqared рассчитывает площадь
- * @param x переменная x
- * @param y переменная y
- * return рассчитанное значение
+/**
+ * @brief рассчитывает периметр прямоугольника
+ * @param x значение ширины 
+ * @param y значение длинны 
+ * @return рассчитанное значение периметра
  */
-double sqared(double x, double y); 
+double getA(double const  x, double const y);
 
-/*
- * @brief diagonal рассчитывает диагональ
- * @param x переменная x
- * @param y переменная y
- * return рассчитанное значение
+/**
+ * @brief рассчитывает площадь прямоугольника 
+ * @param x значение ширины 
+ * @param y значение длинны 
+ * @return рассчитанное значения площади прямоугольника
  */
-double diagonal(double x, double y);
+double getB(double const x, double const y);
 
-/*
- * @bried точка входа в программу
- * return 0 в случае успеха 
+/**
+ * @brief рассчитывает диагональ прямоугольника 
+ * @param x значение ширины 
+ * @param y значение длинны 
+ * @return рассчитанное значение диагонали прямоугольника
+ */
+double getC(double const x, double consty);
+
+enum request{perimetr, area, diagonal};
+/**
+ * @brief точка входа в программу
+ * @return 0 в случае успехa
  */
 int main(void)
 { 
-    double x;
-    double y;
-    while(1)
-    {
-        printf("введите значение x и y:");
-        scanf("%lf %lf", &x, &y);
-        if (proverka(x, y) == 1)
+    double const x = input();
+    double const y = input();
+    int re;
+    printf("Выберите операцию, 0 - периметр, 1 - площадь, 2 - диагональ\n");
+    if (scanf("%d", &re) != 1 || re < 0 || re > 1)
+    { 
+        printf("Несуществующий выбор операции");
+        return 1;
+    }
+
+    switch(re)
+    { 
+        case perimetr:
+            printf("Периметр прямоугольника = %.2lf\n", getA(x, y));
+            break;
+
+        case area:
+            printf("Площадь прямоугольника = %.2lf\n", getB(x, y));
+            break;
+
+        case diagonal:
+            printf("Диагональ прямоугольника = %.2lf\n", getC(x, y));
+            break;
+
+        default:
+            printf("Неверный выбор операции\n");
             break;
 
     }
-    printf("perimetr- %.3lf\nsqared- %.3lf\ndiagonal- %.3lf", perimetr(x, y), sqared(x, y), diagonal(x, y));
 
     return 0; 
 }
 
-int proverka(double x, double y)
-{ 
-    if (x > 0 && y > 0) 
+double input()
+{
+    double value;
+    int result= scanf("%lf", &value);
+    if (result != 1)
     {
-        printf("проверка прошла успешно");
-        return 1;
+        perror("Ошибка ввода\n");
+        abort();
     }
-
-    if (x < 0 && y < 0)
-    { 
-        printf("введите числа >= 0\n");
-        return 0;
-    }
+    return value;
 }
 
-double perimetr(double x, double y)
+double getA(double const x, double const y)
 { 
     return 2 * (x + y);
 }
 
-double sqared(double x, double y)
+double getB(double const x, double const y)
 { 
     return x * y;
 }
 
-double diagonal(double x, double y)
+double getC(double const x, double const y)
 { 
     return sqrt(pow(x, 2) + pow(y, 2));
 }
