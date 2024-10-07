@@ -43,12 +43,10 @@ double getArea(double const x, double const y);
  * @param y значение длинны 
  * @return рассчитанное значение диагонали прямоугольника
  */
-double getDiagonal(double const x, double consty);
+double getDiagonal(double const x, double const y);
 
 /**
- * @param perimetr - периметр прямоугольника
- * @param area - площадь прямоугольника
- * @param diagonal - диагональ прямоугольника
+ * 
  */
 enum request{perimetr, area, diagonal};
 
@@ -61,7 +59,7 @@ int main(void)
     double const x = input();
     double const y = input();
     determinant();
-    int re = inpt();
+    int re = inputInt();
     switch(re)
     { 
         case perimetr:
