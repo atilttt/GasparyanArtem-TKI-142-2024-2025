@@ -32,8 +32,6 @@ double getB(double const x, double const y);
  */
 double getC(double const x, double consty);
 
-void opredelitel(void);
-
 enum request{perimetr, area, diagonal};
 /**
  * @brief точка входа в программу
