@@ -46,7 +46,9 @@ double getArea(double const x, double const y);
 double getDiagonal(double const x, double const y);
 
 /**
- * 
+ * @param perimetr - периметр прямоугольника
+ * @param area - площадь прямоугольника
+ * @param diagonal - диагонал прямоугольника
  */
 enum request{perimetr, area, diagonal};
 
