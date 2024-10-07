@@ -13,7 +13,7 @@ void determinant(void);
  * @brief проверка получаемого значения
  * @return возвращает проверенное число
  */
-double inputDoble(void);
+double inputDouble(void);
 
 /**
  * @brief проверка полученного значения
@@ -56,8 +56,8 @@ enum request{perimetr, area, diagonal};
  */
 int main(void)
 { 
-    double const x = input();
-    double const y = input();
+    double const x = inputDouble();
+    double const y = inputDouble();
     determinant();
     int re = inputInt();
     switch(re)
