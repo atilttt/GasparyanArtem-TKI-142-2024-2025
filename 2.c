@@ -88,13 +88,6 @@ double input()
     return value;
 }
 
-void opredelitel(void)
-{ 
-    printf("Perimetr - %d\n", perimetr);
-    printf("Area - %d\n", area);
-    printf("Diagonal - %d\n", diagonal);
-}
-
 double getA(double const x, double const y)
 { 
     return 2 * (x + y);
