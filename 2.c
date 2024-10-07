@@ -42,7 +42,7 @@ int main(void)
     double const y = input();
     int re;
     printf("Выберите операцию, 0 - периметр, 1 - площадь, 2 - диагональ\n");
-    if (scanf("%d", &re) != 1 || re < 0 || re > 1)
+    if (scanf("%d", &re) != 1 || re < 0 || re > 2)
     { 
         printf("Несуществующий выбор операции");
         return 1;
