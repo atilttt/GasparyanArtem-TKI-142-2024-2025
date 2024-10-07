@@ -2,11 +2,12 @@
 #include <stdlib.h>
 #include <math.h>
 #include <errno.h>
+
 /**
  * @brief проверка получаемого значения
  * @return возвращает проверенное число
  */
-double input();
+double input(void);
 
 /**
  * @brief рассчитывает периметр прямоугольника
@@ -73,7 +74,7 @@ int main(void)
     return 0; 
 }
 
-double input()
+double input(void)
 {
     double value = 0;
     int result= scanf("%lf", &value);
