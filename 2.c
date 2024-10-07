@@ -32,8 +32,6 @@ double getB(double const x, double const y);
  */
 double getC(double const x, double consty);
 
-void opredelitel(void);
-
 enum request{perimetr, area, diagonal};
 /**
  * @brief точка входа в программу
@@ -68,7 +66,7 @@ int main(void)
         default:
             errno = ERANGE;
             perror("Несуществующая функция\n");
-            exit(EXIT_FAILURE)
+            exit(EXIT_FAILURE);
 
     }
 
@@ -77,7 +75,7 @@ int main(void)
 
 double input()
 {
-    double value;
+    double value = 0;
     int result= scanf("%lf", &value);
     if (result != 1)
     {
@@ -86,13 +84,6 @@ double input()
         exit(EXIT_FAILURE);
     }
     return value;
-}
-
-void opredelitel(void)
-{ 
-    printf("Perimetr - %d\n", perimetr);
-    printf("Area - %d\n", area);
-    printf("Diagonal - %d\n", diagonal);
 }
 
 double getA(double const x, double const y)

@@ -2,6 +2,9 @@
 #include <math.h> 
 #include <stdlib.h> 
 
+/**
+ * 
+ */
 double input(); 
 double getA(const double x);
 double getB(const double x);
