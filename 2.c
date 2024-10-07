@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <errno.h>
 /**
  * @brief проверка получаемого значения
  * @return возвращает проверенное число
@@ -30,6 +31,8 @@ double getB(double const x, double const y);
  * @return рассчитанное значение диагонали прямоугольника
  */
 double getC(double const x, double consty);
+
+void opredelitel(void);
 
 enum request{perimetr, area, diagonal};
 /**
@@ -63,8 +66,9 @@ int main(void)
             break;
 
         default:
-            printf("Неверный выбор операции\n");
-            break;
+            errno = ERANGE;
+            perror("Несуществующая функция\n");
+            exit(EXIT_FAILURE)
 
     }
 
@@ -77,10 +81,18 @@ double input()
     int result= scanf("%lf", &value);
     if (result != 1)
     {
+        errno = EIO;
         perror("Ошибка ввода\n");
-        abort();
+        exit(EXIT_FAILURE);
     }
     return value;
+}
+
+void opredelitel(void)
+{ 
+    printf("Perimetr - %d\n", perimetr);
+    printf("Area - %d\n", area);
+    printf("Diagonal - %d\n", diagonal);
 }
 
 double getA(double const x, double const y)
