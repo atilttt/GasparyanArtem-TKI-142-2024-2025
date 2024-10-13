@@ -42,8 +42,8 @@ int main()
 double Input(void)
 { 
     double value = 0.0; 
-    int result = scanf("%lf", &volue);
-    if (result != 1 || volue < 0)
+    int result = scanf("%lf", &value);
+    if (result != 1 || value < 0)
     { 
         errno = EIO; 
         perror("Input error");
