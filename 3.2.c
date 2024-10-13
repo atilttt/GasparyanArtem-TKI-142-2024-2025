@@ -4,14 +4,43 @@
 #include <stdlib.h>
 
 /**
- * 
+ * @brief получает на вход число
+ * @return возвращает проверенное число, в противном случае ошибку
  */
 double input(void);
+
+/**
+ * @brief получает на вход число
+ * @return возвращает провернное число, в противном случае ошибку 
+ */
 int Int_input(void);
+
+/**
+ * @brief функция для получения интеграла
+ * @param number значение параметра number
+ * @return полученный факториал
+ */
 unsigned long long factorial(int number);
+
+/**
+ * @brief рассчитывает значение суммы первых n-членов последовательности
+ * @param n кол-во элементов последовательности
+ * @return рассчитанное значение суммы
+ */
 double get_sum_first_n(int n);
+
+/**
+ * @brief рассчитывает значение суммы всех членов последовательности, не меньше заданного числа е
+ * @param n кол-во элементов последовательности
+ * @param e значение заданного числа е
+ * @return рассчитанное значение суммы
+ */
 double get_sum_dependet_e(int n, const double e);
 
+/**
+ * @brief точка входа в программу 
+ * @return 0 в случае успеха
+ */
 int main(void)
 {
     printf("Please enter the number of sequence elements:\n");
