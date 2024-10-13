@@ -41,7 +41,7 @@ int main()
 
 double Input(void)
 { 
-    double volue = 0.0; 
+    double value = 0.0; 
     int result = scanf("%lf", &volue);
     if (result != 1 || volue < 0)
     { 
@@ -49,7 +49,7 @@ double Input(void)
         perror("Input error");
         exit(EXIT_FAILURE);
     }
-    return volue;
+    return value;
 }
 
 double Path(const double t1, const double t2, const double t3, const double v1, const double v2, const double v3)
