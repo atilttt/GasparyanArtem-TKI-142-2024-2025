@@ -7,8 +7,7 @@
  * @brief определяет наши константы
  * @return возвращает их значения
  */
-void determinant(void);
-
+void determinant(void);d
 /**
  * @brief проверка получаемого значения
  * @return возвращает проверенное число
