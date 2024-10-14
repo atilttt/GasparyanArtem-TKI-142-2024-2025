@@ -26,14 +26,14 @@ double Path(const double t1, const double t2, const double t3, const double v1, 
 int main() 
 {
     printf("Введите значение времени и скорости на 1-ом участке\n"); 
-    const double t1 = Input();
     const double v1 = Input();
+    const double t1 = Input();
     printf("Введите значение времени и скорости на 2-ом участке\n");
-    const double t2 = Input();
     const double v2 = Input();
+    const double t2 = Input();
     printf("Введите значение времени и скорости на 3-eм участке\n");
-    const double t3 = Input();
     const double v3 = Input();
+    const double t3 = Input();
     printf("Время до привала %.3lf", Path(t1,t2,t3,v1,v2,v3));
 
     return 0;
@@ -66,16 +66,17 @@ double Path(const double t1, const double t2, const double t3, const double v1, 
         return half_path / v1; //если путник находится на первом участке// 
     }
 
-    half_path -= s1;
+    half_path = half_path - s1;
     if (half_path < s2)
     { 
-        return t1 + half_path / v2;  //если путник находится на втором участке//
+        return t1 + (half_path / v2);  //если путник находится на втором участке//
     }
 
-    half_path -= s2;
+    half_path = half_path - s2;
     if (half_path < s3)
     { 
-        return t1 + t2 + half_path / v3; //если путник находится на третьем участке//
+        return t1 + t2 + (half_path / v3); //если путник находится на третьем участке//
     }
-
+    
+    return t1 + t2 + t3;
 }
