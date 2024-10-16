@@ -81,7 +81,7 @@ double input(void)
 
 void interval_check(const double start, const double end)
 { 
-    if (end - start < DBL_EPSILON)
+    if (end - start < DBL_EPSILON || fabs(end - start) <= DBL_EPSILON)
     {
         errno = EIO;
         perror("interval input error\n");
@@ -91,7 +91,7 @@ void interval_check(const double start, const double end)
 
 void step_chek(const double step)
 { 
-    if (step < 0)
+    if (step > DBL_EPSILON)
     { 
         errno = EIO;
         perror("step input error\n");
@@ -106,5 +106,5 @@ bool chek_value_x(double x)
 
 double get_function(double x)
 { 
-    return cos(x/ 2) - 2 * sin(1 / x) + 1 / x; 
+    return cos(2 / x) - 2 * sin(1 / x) + 1 / x; 
 }
