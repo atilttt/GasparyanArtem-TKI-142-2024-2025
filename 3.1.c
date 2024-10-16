@@ -31,28 +31,31 @@ void step_chek(const double step);
  * @param x значение параметра х
  * @return возвращает True, если все введенно корректно, в противном случае вернет False
  */
-bool chek_value_x(double x);
+bool chek_value_x(const double x);
 
 /**
  * @brief рассчитывает значение заданной фукнции
  * @param x значение переменной x
  * @return рассчитанное значение функции
  */
-double get_function(double x);
+double get_function(const double x);
 
-
-int main()
+/**
+ * @brief точка входа в программу
+ * @return 0 в случае успеха
+ */
+int main(void)
 {
     printf("please enter interval value\n"); 
     const double start = input();
     const double end = input();
     printf("please enter step\n");
     const double step = input();
-    double x = 0.0;
+    const double x = 0.0;
 
     for (x = start; x <= end + DBL_EPSILON; x += step)
     { 
-        if (chek_value_x(x) == false)
+        if (!chek_value_x(x))
         {
             puts("x input error");
             exit(EXIT_FAILURE);
@@ -99,12 +102,12 @@ void step_chek(const double step)
     }
 }
 
-bool chek_value_x(double x)
+bool chek_value_x(const double x)
 {
-    return x > 0; 
+    return x > DBL_EPSILON; 
 }
 
-double get_function(double x)
+double get_function(const double x)
 { 
     return cos(2 / x) - 2 * sin(1 / x) + 1 / x; 
 }
