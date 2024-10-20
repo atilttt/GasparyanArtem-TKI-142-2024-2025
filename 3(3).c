@@ -40,7 +40,7 @@ double get_function(double x);
  * @param k значение индекса элемента
  * @return рассчитанное рекуррентное значение
  */
-double Current(double x, int k);
+double get_current(double x, int k);
 
 /**
  * @brief рассчитывает сумму функционального ряда
@@ -114,14 +114,14 @@ double get_function(double x)
     return (1.0 / 4.0) * log((1 + x) / (1 - x)) + (1.0 / 2.0) * atan(x); 
 }
 
-double Current(double x, int k)
+double get_current(double x, int k)
 { 
     return pow(x, 4 * k + 1) / (4 * k + 1);
 }
 
 double get_sum_func_row(const double x, const double epsilon)
 { 
-    double current = Current(x, 0); // Начальное значение current
+    double current = get_current(x, 0); // Начальное значение current
     double sum = 0.0;
     int k = 0; 
 
@@ -129,7 +129,7 @@ double get_sum_func_row(const double x, const double epsilon)
     { 
         sum += current;
         k++;
-        current = Current(x, k);
+        current = get_current(x, k);
     } 
 
     return sum;
