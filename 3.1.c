@@ -17,21 +17,21 @@ double input(void);
  * @param end конечное значение заданного интервала
  * @return в случае некорректно заданного интервала, возвращает ошибку
  */
-void interval_chek(const double start, const double end);
+void interval_check(const double start, const double end);
 
 /**
  * @brief проверят корректность заданого шага
  * @param step значение шага
  * @return в случае некорректно заданного шага, возвращает ошибку
  */
-void step_chek(const double step);
+void step_check(const double step);
 
 /**
  * @brief проверяет значение заданного параметра x
  * @param x значение параметра х
  * @return возвращает True, если все введенно корректно, в противном случае вернет False
  */
-bool chek_value_x(const double x);
+bool check_value_x(const double x);
 
 /**
  * @brief рассчитывает значение заданной фукнции
@@ -49,13 +49,15 @@ int main(void)
     printf("please enter interval value\n"); 
     const double start = input();
     const double end = input();
+    interval_check(start, end);
     printf("please enter step\n");
     const double step = input();
-    const double x = 0.0;
+    step_check(step);
+    double x = 0.0; 
 
-    for (x = start; x <= end + DBL_EPSILON; x += step)
+    for (x = start; x + DBL_EPSILON <= end; x += step)
     { 
-        if (!chek_value_x(x))
+        if (!check_value_x(x))
         {
             puts("x input error");
             exit(EXIT_FAILURE);
@@ -66,7 +68,7 @@ int main(void)
     }
 
     return 0;
-}                                                                   
+}
 
 double input(void)
 { 
@@ -75,7 +77,7 @@ double input(void)
     if (result != 1)
     { 
         errno = EIO;
-        perror("Inpur error value\n");
+        perror("Input error value\n");
         exit(EXIT_FAILURE);
     }
     
@@ -84,25 +86,25 @@ double input(void)
 
 void interval_check(const double start, const double end)
 { 
-    if (end - start < DBL_EPSILON || fabs(end - start) <= DBL_EPSILON)
+    if (end <= start)
     {
         errno = EIO;
-        perror("interval input error\n");
+        perror("Interval input error\n");
         exit(EXIT_FAILURE);
     }
 }
 
-void step_chek(const double step)
+void step_check(const double step)
 { 
-    if (step > DBL_EPSILON)
+    if (step <= DBL_EPSILON)
     { 
         errno = EIO;
-        perror("step input error\n");
+        perror("Step input error\n");
         exit(EXIT_FAILURE);
     }
 }
 
-bool chek_value_x(const double x)
+bool check_value_x(const double x)
 {
     return x > DBL_EPSILON; 
 }
