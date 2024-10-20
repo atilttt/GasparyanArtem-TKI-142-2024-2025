@@ -1,50 +1,136 @@
-#include <stdio.h> 
-#include <stdlib.h> 
-#include <errno.h> 
-#include <math.h> 
-#include <float.h> 
-#include <stdbool.h>
+#define _USE_MATH_DEFINES
+
+#include <stdio.h>
+#include <math.h>
+#include <errno.h>
+#include <stdlib.h>
+#include <float.h>
 
 /**
- * @brief получает число из потока ввода
- * @return возвращает проверенное число
+ * @brief получает на вход число из потока ввода 
+ * @return возвращает полученное число, иначе вернет ошибку
  */
 double input(void);
 
 /**
- * @brief проверяет корректность заданного шага
- * @param step - заданный шаг
- * @return dвозвращает ошибку, если шаг задан некорректно
+ * @brief функция, проверяющая заданный интервал
+ * @param a начальная точка заданного интервала
+ * @param b конечная точка заданного интервала
+ * @return возвращает ошибку в случае, если интервал был задан неверно
  */
-void chek_step(const double step);
+void interval_check(const double a, const double b);
 
 /**
- * @brief проверяет корректность заданного интервала
- * @param start начальная точка интервала
- * @param end 
- * @return 
+ * @brief функция, проверяющая заданный шаг 
+ * @param step значение заданного шага
+ * @return возвращает ошибку в случае, если шаг был задан неверно
  */
-void chek_interval(const double start, const double end);
+void check_step(const double step);
 
 /**
- * @brief рассчитывает значение функции в точке х
- * @param х значение параметра х
+ * @brief рассчитывает значение функции в заданной точке
+ * @param x значение аргумента
  * @return рассчитанное значение функции
  */
-double function(const double x);
+double get_function(double x);
 
+/**
+ * @brief рассчитывает рекуррентное выражение
+ * @param x значение аргумента 
+ * @param k значение индекса элемента
+ * @return рассчитанное рекуррентное значение
+ */
+double Current(double x, int k);
+
+/**
+ * @brief рассчитывает сумму функционального ряда
+ * @param a начальная точка интервала
+ * @param b конечная точка интервала
+ * @param eps заданная точность 
+ * @return рассчитанное значение суммы функционального ряда
+ */
+double get_sum_func_row(const double x, const double eps);
+
+/** 
+ * @brief точка входа в программу
+ * @return 0 в случае успеха
+ */
 int main(void)
-{ 
-    printf("Please enter value x:\n");
-    const double x = input(); 
-    printf("Please enter interval:\n start: \n end: \n");
-    const double start = input();
-    const double end = input();
-    printf("Please enter value step:\n");
+{
+    const double eps = pow(30, -5);
+    printf("Please enter interval value\n");
+    const double a = input(); 
+    const double b = input();
+    printf("Please enter step value\n");
     const double step = input();
-    const double E = pow(30, -5);
 
+    interval_check(a, b);
+    check_step(step);
 
+    for (double x = a; x <= b + DBL_EPSILON; x += step)
+    { 
+        printf("\nx = %.2f\t\tf(x) = %.6f\t\tS(x) = %.6f\n", x, get_function(x), get_sum_func_row(x, eps));
+    }
 
     return 0;
+}
+
+double input(void) 
+{ 
+    double value = 0.0; 
+    int result = scanf("%lf", &value); 
+    if (result != 1)
+    { 
+        errno = EIO; 
+        perror("Input error\n");
+        exit(EXIT_FAILURE);
+    }
+
+    return value;
+}
+
+void interval_check(const double a, const double b)
+{ 
+    if (b - a < DBL_EPSILON)
+    {
+        errno = EINVAL; 
+        perror("Interval value is set incorrectly\n");
+        exit(EXIT_FAILURE);
+    }
+}
+
+void check_step(const double step)
+{
+    if (step < DBL_EPSILON)
+    { 
+        errno = EINVAL; 
+        perror("Step value is set incorrectly\n");
+        exit(EXIT_FAILURE);
+    }
+}
+
+double get_function(double x)
+{ 
+    return (1.0 / 4.0) * log((1 + x) / (1 - x)) + (1.0 / 2.0) * atan(x); 
+}
+
+double Current(double x, int k)
+{ 
+    return pow(x, 4 * k + 1) / (4 * k + 1);
+}
+
+double get_sum_func_row(const double x, const double epsilon)
+{ 
+    double current = Current(x, 0); // Начальное значение current
+    double sum = 0.0;
+    int k = 0; 
+
+    while (fabs(current) > epsilon)
+    { 
+        sum += current;
+        k++;
+        current = Current(x, k);
+    } 
+
+    return sum;
 }
