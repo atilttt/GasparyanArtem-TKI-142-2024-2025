@@ -4,23 +4,24 @@
 #include <stdlib.h>
 
 /**
- * @brief получает на вход число
+ * @brief получает на вход число из потока ввода
  * @return возвращает проверенное число, в противном случае ошибку
  */
 double input(void);
 
 /**
- * @brief получает на вход число
+ * @brief получает на вход число из потока ввода
  * @return возвращает провернное число, в противном случае ошибку 
  */
 int Int_input(void);
 
 /**
- * @brief функция для получения интеграла
- * @param number значение параметра number
- * @return полученный факториал
+ * @brief вычисляет следующий член последовательности при помощи рекуррентного выражения
+ * @param previous_term значение предыдущего члена последовательности
+ * @param k текущий индекс последовательности
+ * @return значение следующего члена последовательности
  */
-unsigned long long factorial(int number);
+double next_term(double previous_term, int k);
 
 /**
  * @brief рассчитывает значение суммы первых n-членов последовательности
@@ -79,23 +80,20 @@ double input(void)
     return parameter;
 }
 
-unsigned long long factorial(int number) {
-    if (number == 0 || number == 1) {
-        return 1;
-    }
-    unsigned long long fact = 1;
-    for (int i = 2; i <= number; i++) {
-        fact *= i;
-    }
-
-    return fact;
+double next_term(double previous_term, int k) {
+    return previous_term * (pow(k, 4) / k);
 }
 
 double get_sum_first_n(const int n)
 {
     double sum = 0.0;
-    for (int k = 1; k <= n; ++k) {  
-        sum += pow(k, 4) / factorial(k);
+    double term = 1.0;  // Начальный член a_1 = 1^4 / 1!
+
+    for (int k = 1; k <= n; ++k) {
+        if (k > 1) {
+            term = next_term(term, k);
+        }
+        sum += term;
     } 
 
     return sum;
@@ -103,10 +101,14 @@ double get_sum_first_n(const int n)
 
 double get_sum_dependet_e(int n, double e) {
     double sum = 0.0;
+    double term = 1.0;  // Начальный член a_1 = 1^4 / 1!
+
     for (int k = 1; k <= n; k++) {
-        double now_sum = pow(k, 4) / factorial(k);
-        if (now_sum >= e) {
-            sum += now_sum;
+        if (k > 1) {
+            term = next_term(term, k);
+        }
+        if (term >= e) {
+            sum += term;
         }
     }
     return sum;
