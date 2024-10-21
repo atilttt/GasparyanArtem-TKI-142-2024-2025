@@ -1,5 +1,3 @@
-#define _USE_MATH_DEFINES
-
 #include <stdio.h>
 #include <math.h>
 #include <errno.h>
@@ -125,7 +123,7 @@ double get_sum_func_row(const double x, const double epsilon)
     double sum = 0.0;
     int k = 0; 
 
-    while (fabs(current) > epsilon)
+    while (fabs(current) > eps)
     { 
         sum += current;
         k++;
