@@ -14,13 +14,19 @@ double input(void);
  * @brief получает на вход число из потока ввода
  * @return возвращает провернное число, в противном случае ошибку 
  */
-int Integer_Input(void);
+int integer_input(void);
 
 /**
- * @brief функция для проверки на положительность заданного параметра
- * @return возвращает ошибку в случае, если значение параметра заданно некорректно
+ * @brief проверяет заданное число на положительность
+ * @return возвращает проверенное число, в ином случае завершает программу и пишет ошибку
  */
-void check_n(const int n);
+int positive_int(void);
+
+/**
+ * @brief проверяет заданное число на положительность 
+ * @return возвращает проверенное число, в ином случае завершает программу и пишет ошибку
+ */
+double pozitive_double(void);
 
 /**
  * @brief вычисляет следующий член последовательности при помощи рекуррентного выражения
@@ -53,20 +59,20 @@ int main(void)
 {
     printf("Please enter the number of sequence elements:\n");
     const int n = Integer_Input();
-    check_n(n);
     printf("Please enter value e:\n");
     const double e = input();
+    check_e(e);
     printf("The sum of the first n terms of the sequence = %.3lf\n", get_sum_first_n(n));
     printf("The sum of all the members of the sequence, not less than a given number e = %.3lf\n", get_sum_dependet_e(n, e));
 
     return 0; 
 }
 
-int Integer_Input(void)
+int integer_input(void)
 { 
     int value = 0; 
     int result = scanf("%d", &value);
-    if (result != 1) { 
+    if (result != 1) {
         errno = EIO;
         perror("Input error");
         exit(EXIT_FAILURE);
@@ -75,15 +81,20 @@ int Integer_Input(void)
     return value;
 }
 
-void check_n(const int n)
-{ 
-    if (n < 0)
+int positive_int(void)
+{
+     int value =  integer_input();
+     
+        if (value < 0)
     { 
-        errno = EINVAL; 
+        errno = EIO;
         perror("Impossible value for n");
         exit(EXIT_FAILURE);
     }
+
+    return value;
 }
+
 
 double input(void)
 { 
@@ -91,14 +102,27 @@ double input(void)
     int outcome = scanf("%lf", &parameter);
     if (outcome != 1) { 
         errno = EIO; 
-        perror("Impossible value for e");
+        perror("Input error\n");
         exit(EXIT_FAILURE);
     }
 
     return parameter;
 }
 
-double next_term(const double previous_term, int k) {
+double pozitiv_double(void)
+{ 
+    double parameter = input();
+    if (parameter < DBL_EPSILON)
+    { 
+        errno = EIO;
+        perror("Input error\n");
+        exit(EXIT_FAILURE);
+    }
+
+    return parameter;
+}
+
+double next_term(const double previous_term, const int k) {
     return previous_term * (pow(k, 4) / k);
 }
 
