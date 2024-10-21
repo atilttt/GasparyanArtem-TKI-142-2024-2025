@@ -60,7 +60,6 @@ int main(void)
         if (!check_value_x(x))
         {
             puts("x input error");
-            exit(EXIT_FAILURE);
         }
         else { 
             printf("In point x = %.3lf, value function y = %.3lf\n", x, get_function(x));
@@ -86,7 +85,7 @@ double input(void)
 
 void interval_check(const double start, const double end)
 { 
-    if (end <= start)
+    if (end - start < DBL_EPSILON)
     {
         errno = EIO;
         perror("Interval input error\n");
