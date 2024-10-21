@@ -34,7 +34,7 @@ double next_term(const double previous_term, int k);
  * @param n кол-во элементов последовательности
  * @return рассчитанное значение суммы
  */
-double get_sum_first_n(int n);
+double get_sum_first_n(const int n);
 
 /**
  * @brief рассчитывает значение суммы всех членов последовательности, не меньше заданного числа е
@@ -42,7 +42,7 @@ double get_sum_first_n(int n);
  * @param e значение заданного числа е
  * @return рассчитанное значение суммы
  */
-double get_sum_dependet_e(int n, const double e);
+double get_sum_dependet_e(const int n, const double e);
 
 /**
  * @brief точка входа в программу 
@@ -107,16 +107,15 @@ double get_sum_first_n(const int n)
     double term = 1.0;  // Начальный член a_1 = 1^4 / 1!
 
     for (int k = 1; k <= n; ++k) {
-        if (k > 1) {
-            term = next_term(term, k);
-        }
+        term = next_term(term, k);
         sum += term;
     } 
 
     return sum;
 }
 
-double get_sum_dependet_e(const double e) {
+double get_sum_dependet_e(const double e) 
+{
     double sum = 0.0;
     double term = 1.0;  // Начальный член a_1 = 1^4 / 1!
     int k = 1;
