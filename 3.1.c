@@ -12,19 +12,18 @@
 double input(void);
 
 /**
+ * @brief проверяет заданное число на положительность
+ * @return возвращает проверенное число, в ином случаешь завершает программу и пишет ошибку
+ */
+double pozitiv_double(void);
+
+/**
  * @brief проверяет корретность заданного интервала
  * @param start начальное значение заданного интервала
  * @param end конечное значение заданного интервала
  * @return в случае некорректно заданного интервала, возвращает ошибку
  */
 void interval_check(const double start, const double end);
-
-/**
- * @brief проверят корректность заданого шага
- * @param step значение шага
- * @return в случае некорректно заданного шага, возвращает ошибку
- */
-void step_check(const double step);
 
 /**
  * @brief проверяет значение заданного параметра x
@@ -52,7 +51,6 @@ int main(void)
     interval_check(start, end);
     printf("please enter step\n");
     const double step = input();
-    step_check(step);
     double x = 0.0; 
 
     for (x = start; x + DBL_EPSILON <= end; x += step)
@@ -80,6 +78,19 @@ double input(void)
         exit(EXIT_FAILURE);
     }
     
+    return value;
+}
+
+double pozitiv_double(void)
+{
+    double value = input();
+    if (value < DBL_EPSILON)
+    { 
+        errno = EIO;
+        perror("Input error\n");
+        exit(EXIT_FAILURE);
+    }
+
     return value;
 }
 
