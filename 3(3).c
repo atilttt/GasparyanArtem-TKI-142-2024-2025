@@ -120,7 +120,7 @@ double get_function(const double x)
 }
 
 double get_current(const double x, int k)
-{   
+{ 
     return pow(x, 4 * k + 1) / (4 * k + 1);
 }
 
