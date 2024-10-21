@@ -1,7 +1,8 @@
 #include <stdio.h> 
 #include <stdlib.h>
 #include <errno.h> 
-#include <math.h> 
+#include <math.h>
+#include <time.h> 
 
 /**
  * @brief получает на вход число из потока ввода
@@ -10,33 +11,25 @@
 int integer_input(void);
 
 /**
- * @brief 
- * @return
+ * @brief проверка значения на положительность
+ * @param n значение параметра n
+ * @return возвращает ошибку в случае если значение заданно некорректно
  */
 void pozitiv(const int n);
 
 /**
- * @brief функция для проверки пользовательского выбора метода
- * @return возвращает ошибку в случае, если пользователь ввел некорректное значение
+ * @param random заполнение массива случайными числами
+ * @param kaybord_input заполнение массива вводом с клавиатуры
  */
-void check_value_metod(const int metod);
-
-int choose_metod(const int metod);
-/**
- * @brief
- */
-void get_arrey();
-
+enum choiсe{random = 1, keyboard_input = 2};
 
 int main(void)
 { 
     printf("Please enter the number of elements in arrey\n");
     const int n = integer_input();
     pozitiv(n);
-    printf("please enter the option to fill in the array. Enter the number: 1 or 2\n");
-    int metod = integer_input();
-    check_value_metod(metod);
-
+    int arr[n]; 
+    switch
 
 }
 
@@ -64,12 +57,3 @@ void pozitiv(const int n)
     }
 }
 
-void check_value_metod(const int metod)
-{ 
-    if (metod != 1 || metod != 2)
-    { 
-        errno = EINVAL;
-        perror("the entered method value is incorrect\n");
-        exit(EXIT_FAILURE);
-    }
-}
