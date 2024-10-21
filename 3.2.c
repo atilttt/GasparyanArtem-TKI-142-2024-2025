@@ -14,13 +14,14 @@ double input(void);
  * @brief получает на вход число из потока ввода
  * @return возвращает провернное число, в противном случае ошибку 
  */
-int Integer_input(void);
+int Integer_Input(void);
 
 /**
  * @brief функция для проверки на положительность заданного параметра
  * @return возвращает ошибку в случае, если значение параметра заданно некорректно
  */
 void check_n(const int n);
+
 /**
  * @brief вычисляет следующий член последовательности при помощи рекуррентного выражения
  * @param previous_term значение предыдущего члена последовательности
@@ -51,7 +52,7 @@ double get_sum_dependet_e(const int n, const double e);
 int main(void)
 {
     printf("Please enter the number of sequence elements:\n");
-    const int n = Int_input();
+    const int n = Integer_Input();
     check_n(n);
     printf("Please enter value e:\n");
     const double e = input();
@@ -61,7 +62,7 @@ int main(void)
     return 0; 
 }
 
-int Integer_input(void)
+int Integer_Input(void)
 { 
     int value = 0; 
     int result = scanf("%d", &value);
