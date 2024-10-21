@@ -1,5 +1,3 @@
-#define _USE_MATH_DEFINES
-
 #include <stdio.h>
 #include <math.h>
 #include <errno.h>
@@ -32,7 +30,7 @@ void check_step(const double step);
  * @param x значение аргумента
  * @return рассчитанное значение функции
  */
-double get_function(double x);
+double get_function(const double x);
 
 /**
  * @brief рассчитывает рекуррентное выражение
@@ -40,7 +38,7 @@ double get_function(double x);
  * @param k значение индекса элемента
  * @return рассчитанное рекуррентное значение
  */
-double Current(double x, int k);
+double get_current(const double x, int k);
 
 /**
  * @brief рассчитывает сумму функционального ряда
@@ -68,7 +66,7 @@ int main(void)
     check_step(step);
 
     for (double x = a; x <= b + DBL_EPSILON; x += step)
-    { 
+    {
         printf("\nx = %.2f\t\tf(x) = %.6f\t\tS(x) = %.6f\n", x, get_function(x), get_sum_func_row(x, eps));
     }
 
@@ -109,27 +107,34 @@ void check_step(const double step)
     }
 }
 
-double get_function(double x)
-{ 
+double get_function(const double x)
+{   
+    if (x <= - 1 + DBL_EPSILON || x >= 1 - DBL_EPSILON)
+    { 
+        errno - EINVAL;
+        perror("Impossible value for x\n");
+        exit(EXIT_FAILURE);
+    }
+
     return (1.0 / 4.0) * log((1 + x) / (1 - x)) + (1.0 / 2.0) * atan(x); 
 }
 
-double Current(double x, int k)
-{ 
+double get_current(const double x, int k)
+{   
     return pow(x, 4 * k + 1) / (4 * k + 1);
 }
 
-double get_sum_func_row(const double x, const double epsilon)
+double get_sum_func_row(const double x, const double eps)
 { 
-    double current = Current(x, 0); // Начальное значение current
+    double current = get_current(x, 0); // Начальное значение current
     double sum = 0.0;
     int k = 0; 
 
-    while (fabs(current) > epsilon)
+    while (fabs(current) > eps)
     { 
         sum += current;
         k++;
-        current = Current(x, k);
+        current = get_current(x, k);
     } 
 
     return sum;
