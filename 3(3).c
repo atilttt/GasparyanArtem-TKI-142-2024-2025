@@ -111,7 +111,7 @@ double get_function(const double x)
 {   
     if (x <= - 1 + DBL_EPSILON || x >= 1 - DBL_EPSILON)
     { 
-        errno - EINVAL;
+        errno = EINVAL;
         perror("Impossible value for x\n");
         exit(EXIT_FAILURE);
     }
