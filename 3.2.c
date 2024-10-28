@@ -34,7 +34,7 @@ double pozitive_double(void);
  * @param k текущий индекс последовательности
  * @return значение следующего члена последовательности
  */
-double next_term(const double previous_term, int k);
+double next_term(const double previous_term, const int k);
 
 /**
  * @brief рассчитывает значение суммы первых n-членов последовательности
