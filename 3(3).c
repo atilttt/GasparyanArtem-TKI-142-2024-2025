@@ -114,6 +114,16 @@ void check_step(const double step)
 
 double get_function(const double x)
 {   
+<<<<<<< HEAD
+=======
+    if (x <= - 1 + DBL_EPSILON || x >= 1 - DBL_EPSILON)
+    { 
+        errno = EINVAL;
+        perror("Impossible value for x\n");
+        exit(EXIT_FAILURE);
+    }
+
+>>>>>>> 16ce57d67d8f3091a5bccda561415660064e6eb1
     return (1.0 / 4.0) * log((1 + x) / (1 - x)) + (1.0 / 2.0) * atan(x); 
 }
 
