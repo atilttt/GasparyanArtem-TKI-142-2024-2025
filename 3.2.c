@@ -131,7 +131,7 @@ double get_sum_first_n(const int n)
     double sum = 0.0;
     double term = 1.0;  // Начальный член a_1 = 1^4 / 1!
 
-    for (int k = 1; k <= n; ++k) {
+    for (int k = 1; k < n; ++k) {
         term = next_term(term, k);
         sum += term;
     } 
