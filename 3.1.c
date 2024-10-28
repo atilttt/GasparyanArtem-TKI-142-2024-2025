@@ -51,9 +51,8 @@ int main(void)
     interval_check(start, end);
     printf("please enter step\n");
     const double step = input();
-    double x = 0.0; 
 
-    for (x = start; x + DBL_EPSILON <= end; x += step)
+    for (double x = start; x <= end + DBL_EPSILON; x += step)
     { 
         if (!check_value_x(x))
         {
