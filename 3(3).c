@@ -38,7 +38,7 @@ double get_function(const double x);
  * @param k значение индекса элемента
  * @return рассчитанное рекуррентное значение
  */
-double get_current(const double x, int k);
+double get_current(const double x, const int k);
 
 /**
  * @brief рассчитывает сумму функционального ряда
@@ -67,7 +67,12 @@ int main(void)
 
     for (double x = a; x <= b + DBL_EPSILON; x += step)
     {
-        printf("\nx = %.2f\t\tf(x) = %.6f\t\tS(x) = %.6f\n", x, get_function(x), get_sum_func_row(x, eps));
+        if (x <= -1 + DBL_EPSILON || x >= 1 - DBL_EPSILON) {
+            printf("the function does not exist at this point\n");
+        }else {
+            printf("\nx = %.2f\t\tf(x) = %.6f\t\tS(x) = %.6f\n", x, get_function(x), get_sum_func_row(x, eps));
+        }
+
     }
 
     return 0;
@@ -109,13 +114,6 @@ void check_step(const double step)
 
 double get_function(const double x)
 {   
-    if (x <= - 1 + DBL_EPSILON || x >= 1 - DBL_EPSILON)
-    { 
-        errno - EINVAL;
-        perror("Impossible value for x\n");
-        exit(EXIT_FAILURE);
-    }
-
     return (1.0 / 4.0) * log((1 + x) / (1 - x)) + (1.0 / 2.0) * atan(x); 
 }
 
