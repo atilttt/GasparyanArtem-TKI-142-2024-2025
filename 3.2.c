@@ -34,7 +34,7 @@ double pozitive_double(void);
  * @param k текущий индекс последовательности
  * @return значение следующего члена последовательности
  */
-double next_term(const double previous_term, const int k);
+double next_term(const double previous_term, const int k); // добавлено const //
 
 /**
  * @brief рассчитывает значение суммы первых n-членов последовательности
@@ -61,7 +61,7 @@ int main(void)
     const int n = Integer_Input();
     printf("Please enter value e:\n");
     const double e = input();
-    check_e(e);
+    check_e(e); // проверка epslion обьеденненная в один шаг //
     printf("The sum of the first n terms of the sequence = %.3lf\n", get_sum_first_n(n));
     printf("The sum of all the members of the sequence, not less than a given number e = %.3lf\n", get_sum_dependet_e(n, e));
 
