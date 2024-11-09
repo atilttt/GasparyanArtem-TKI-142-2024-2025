@@ -67,7 +67,7 @@ int main(void)
 
     for (double x = a; x <= b + DBL_EPSILON; x += step)
     {
-        if (x >= -1 + DBL_EPSILON && x <= 1 - DBL_EPSILON)  { //изменение ООФ//
+        if (x > -1 + DBL_EPSILON && x < 1 - DBL_EPSILON)  { //изменение ООФ//
             printf("the function does not exist at this point\n");
         }else {
             printf("\nx = %.2f\t\tf(x) = %.6f\t\tS(x) = %.6f\n", x, get_function(x), get_sum_func_row(x, eps));
