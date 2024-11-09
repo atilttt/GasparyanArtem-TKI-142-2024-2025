@@ -58,10 +58,9 @@ double get_sum_dependet_e(const int n, const double e);
 int main(void)
 {
     printf("Please enter the number of sequence elements:\n");
-    const int n = Integer_Input();
+    const int n = positive_int();
     printf("Please enter value e:\n");
-    const double e = input();
-    pozitiv_double(e); // проверка epslion обьеденненная в один шаг //
+    const double e = pozitive_double();
     printf("The sum of the first n terms of the sequence = %.3lf\n", get_sum_first_n(n));
     printf("The sum of all the members of the sequence, not less than a given number e = %.3lf\n", get_sum_dependet_e(n, e));
 
@@ -128,7 +127,7 @@ double next_term(const double previous_term, const int k) {
 
 double get_sum_first_n(const int n)
 {
-    double sum = 0.0;
+    double sum = 1.0;
     double term = 1.0;  // Начальный член a_1 = 1^4 / 1!
 
     for (int k = 1; k < n; ++k) {
@@ -146,9 +145,9 @@ double get_sum_dependet_e(const double e)
     int k = 1;
     while (term >= e + DBL_EPSILON)
     {
-        sum += term;
         k++;
         term = next_term(term, k);
+        sum += term;
     }
     
     return sum;
