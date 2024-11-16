@@ -1,199 +1,100 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <errno.h>
-#include <time.h>
+#include "4.h"
 
-/**
-* @brief Получает целое число от пользователя.
-* @return Введенное целое число; завершает выполнение, если ввод некорректен.
-*/
-int getInt(void);
-
-/**
- * @brief Проверяет, что введенное значение положительно.
- * @return Положительное число; завершает выполнение, если число некорректно.
- */
-int getPosInt(void);
-
-/**
- * @brief Показывает меню для выбора способа заполнения массива.
- */
-void showMenu(void);
-
-/**
-* @brief Проверяет, что k меньше или равно размеру массива.
-* @param k Количество последних элементов для инвертирования.
-* @param n Размер массива.
- */
-void checkK(int k, int n);
-
-/**
-* @brief Заполняет массив случайными числами в диапазоне [-100, 100].
-* @param arr Указатель на массив.
-* @param n Размер массива.
- */
-void fillRand(int* arr, int n);
-
-/**
-* @brief Заполняет массив значениями, введенными пользователем.
-* @param arr Указатель на массив.
-* @param n Размер массива.
- */
-void fillUser(int* arr, int n);
-
-/**
-* @brief Инвертирует знак последних k элементов массива.
-* @param arr Указатель на массив.
-* @param n Размер массива.
-* @param k Количество последних элементов для инвертирования знака.
- */
-void invertLastK(int* arr, int n, int k);
-
-/**
-* @brief Выводит индексы элементов массива, кратных 3.
-* @param arr Указатель на массив.
-* @param n Размер массива.
- */
-void printMult3Idx(int* arr, int n);
-
-/**
-* @brief Проверяет наличие пары соседних элементов с заданной суммой.
-* @param arr Указатель на массив.
-* @param n Размер массива.
-* @param sum Искомая сумма.
-* @return Возвращает 1, если пара найдена; 0 — если нет.
- */
-int findAdjSum(int* arr, int n, int sum);
-
-/**
-* @brief Точка входа в программу.
-* @return Возвращает 0 в случае успеха.
- */
-int main(void) {
-    printf("Введите размер массива: ");
-    int n = getPosInt();
-    int* arr = (int*)malloc(n * sizeof(int));
-
-    showMenu();
-    int choice = getInt();
+int main(void)
+{ 
+    printf("Введите размер массива\n");
+    const size_t n = pozitiv_input();
+    size_t* array = (size_t*)malloc(n * sizeof(size_t));
+    if (array == NULL)
+    { 
+        printf("Произошла ошибка\n");
+        abort();
+    }
     
-    switch (choice) {
-        case 1:
-            srand(time(0));
-            fillRand(arr, n);
-            printf("Массив случайных чисел: ");
-            for (int i = 0; i < n; i++) {
-                printf("%d ", arr[i]);
-            }
-            printf("\n");
+    printf("Пожалуйста, выберите каким методом вы хотите воспользоваться.\n");
+    printf("Метод рандомного заполнения - 1, метод заполнения с помощью ввода - 0\n");
+    int dependet = pozitiv_input();
+    switch(dependet)
+    { 
+        case RANDOM:
+            random_filling(array, n);
             break;
-        case 2:
-            fillUser(arr, n);
+        case INPUT:
+            user_input(array, n);
             break;
         default:
-            errno = ERANGE;
-            perror("Ошибка: Неверный выбор\n");
+            printf("Вы где-то ошиблись, скорее всего это неверный ввод\n");
             exit(EXIT_FAILURE);
     }
+    print_array(array, n);
+    printf("Вы можете заменить последние k элементов на противоположные по знаку\n");
+    printf("Выберите индексы этих элементов\n");
+    const int k = pozitiv_input();
+    check_elements_k(array, k, n);
+    
+    printf("Так же эта программа выводит индексы тех элементов, которые кратны 3\n");
+    index_elements_multiples_three(array, n);
 
-    printf("Исходный массив: ");
-    for (int i = 0; i < n; i++) {
-        printf("%d ", arr[i]);
-    }
-    printf("\n");
-
-    printf("Введите количество последних элементов для инвертирования: ");
-    int k = getPosInt();
-    checkK(k, n);
-    invertLastK(arr, n, k);
-
-    printf("Массив после инвертирования последних %d элементов: ", k);
-    for (int i = 0; i < n; i++) {
-        printf("%d ", arr[i]);
-    }
-    printf("\n");
-
-    printMult3Idx(arr, n);
-
-    printf("Введите искомую сумму: ");
-    int targetSum = getInt();
-    findAdjSum(arr, n, targetSum);
-
-    free(arr);
+    free(array);
     return 0;
 }
 
-int getInt(void) {
-    int val = 0;
-    int res = scanf("%d", &val);
-    if (res != 1) {
+int input(void) {
+    int value = 0;
+    int result = scanf("%d", &value);
+    if (result != 1) {
         errno = EIO;
-        perror("Ошибка ввода!");
         exit(EXIT_FAILURE);
     }
-    return val;
+    return value;
 }
 
-int getPosInt(void) { 
-    int val = getInt();
-    if (val <= 0) { 
+int pozitiv_input(void) {
+    int value = input();
+    if (value < 0) {
         errno = EINVAL;
-        perror("Число должно быть положительным\n");
         exit(EXIT_FAILURE);
     }
-    return val;
+    return value;
 }
 
-void showMenu(void) {
-    printf("Выберите способ заполнения массива:\n");
-    printf("1 - Случайные числа\n");
-    printf("2 - Ввод с клавиатуры\n");
-}
-
-void fillRand(int* arr, int n) {
-    for (int i = 0; i < n; i++) {
-        arr[i] = (rand() % 201) - 100;
+void random_filling(size_t *array, const size_t n) {
+    for (size_t index = 0; index < n; ++index) {
+        array[index] = (rand() % n);
     }
 }
 
-void checkK(int k, int n) {
-    if (k > n || k < 0) {
-        errno = ERANGE;
-        perror("Ошибка: Некорректное значение\n");
+void user_input(size_t *array, const size_t n) {
+    for (size_t i = 0; i < n; ++i) {
+        printf("Пожалуйста введите числа, исходя из диапазона, который вы сами задали\n");
+        array[i] = input();
+    }
+}
+
+void print_array(const size_t *array, const size_t n) {
+    for (size_t i = 0; i < n; ++i) {
+        printf("Ваш массив = %d\n", array[i]);
+    }
+}
+
+void check_elements_k(size_t *array, int k, const size_t n) {
+    if (k <= 0 || k > n) {
+        printf("Неверное значение для k. Должно быть: 0 < k <= размер массива.\n");
         exit(EXIT_FAILURE);
     }
-}
 
-void fillUser(int* arr, int n) {
-    for (int i = 0; i < n; i++) {
-        printf("Введите элемент %d: ", i);
-        arr[i] = getInt();
+    for (size_t i = n - k; i < n; ++i) {
+        array[i] = -array[i];
     }
+    printf("Ваш массив после изменений имеет вид:\n");
+    print_array(array, n);
 }
 
-void invertLastK(int* arr, int n, int k) {
-    for (int i = n - k; i < n; i++) {
-        arr[i] = -arr[i];
-    }
-}
-
-void printMult3Idx(int* arr, int n) {
-    printf("Индексы элементов, кратных 3: ");
-    for (int i = 0; i < n; i++) {
-        if (arr[i] % 3 == 0) {
-            printf("%d ", i);
+void index_elements_multiples_three(const size_t *array, const size_t n) {
+    printf("Индексы элементов, кратных 3:\n");
+    for (size_t i = 0; i < n; ++i) {
+        if (array[i] % 3 == 0) {
+            printf("Индекс: %zu\n", i);
         }
     }
-    printf("\n");
-}
-
-int findAdjSum(int* arr, int n, int sum) {
-    for (int i = 0; i < n - 1; i++) {
-        if (arr[i] + arr[i + 1] == sum) {
-            printf("Пара с суммой %d найдена: элементы %d и %d (индексы %d и %d)\n", sum, arr[i], arr[i + 1], i, i + 1);
-            return 1;
-        }
-    }
-    printf("Пара с суммой %d не найдена.\n", sum);
-    return 0;
 }
