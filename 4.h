@@ -29,21 +29,21 @@ enum choice{
  * @param array - указатель на массив (эквивалентно array[])
  * @param n переменная, отвечающая за размер массива
  */
-void random_filling(size_t *array, const size_t n);
+void random_filling(int *array, const size_t n);
 
 /**
  * @brief заполняет массив пользовательским вводом
  * @param array - указатель на массив (эквивалентно array[])
  * @param n перемнная, отвечающая за размер массива
  */
-void user_input(size_t *array, const size_t n);
+void user_input(int *array, const size_t n);
 
 /**
  * @brief функция которая печатает массив
  * @param array указатель на массив (эквивалентно array []) 
  * @param n перменная, отвечающая за размер массива
  */
-void print_array(const size_t *array, const size_t n);
+void print_array(const int *array, const size_t n);
 
 /**
  * @brief заменяет последние k элементов массива на противоположные
@@ -51,11 +51,11 @@ void print_array(const size_t *array, const size_t n);
  * @param k переменная k
  * @param n переменная, отвечающая за размер массива
  */
-void check_elements_k(size_t *array, const int k, const size_t n);
+void check_elements_k(int *array, const int k, const size_t n);
 
 /**
  * @brief функция находит элементы, кратные 3ом, и выводит их
  * @param array указатель на массив (эквивалентно array[]) 
  * @param n переменная, отвечающая за размер массива
  */
-void index_elements_multiples_three(const size_t *array, const size_t n);
+void index_elements_multiples_three(const int *array, const size_t n);
