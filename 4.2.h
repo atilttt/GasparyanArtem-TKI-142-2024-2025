@@ -39,3 +39,10 @@ void random_filling(int *array, const size_t n);
  * @param n переменная, отвечающая за размер массива
  */
 void user_input_filling(int *array, const size_t n);
+
+/**
+ * @brief функция, которая выводит массив
+ * @param array указатель на массив (эквивалентно array[])
+ * @param n переменная, отвечающая за размер массива
+ */
+void print_array(int *array, const size_t n);
