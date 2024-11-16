@@ -45,4 +45,26 @@ void user_input_filling(int *array, const size_t n);
  * @param array указатель на массив (эквивалентно array[])
  * @param n переменная, отвечающая за размер массива
  */
-void print_array(int *array, const size_t n);
+void print_array(const int *array, const size_t n);
+
+/**
+ * @brief функция находит первый отрицательный элемент в массиве и меняет его на 0
+ * @param array указатель на массив (эквивалентно array[])
+ * @param n переменная, отвечающая за размер массива
+ */
+void replacement(int *array, const size_t n);
+
+/**
+ * @brief функция находит элементарные числа и после них вставляет произвольное число, заданое пользователем
+ * @param array указатель на массив (эквиваленто array[]) 
+ * @param n переменная, отвечающая за размер массива 
+ * @param k переменная, хранящая в себе произвольное число, заданное пользователем
+ */
+int* elementary_numbers(int *array, const size_t n, const int k);
+
+/**
+ * @brief функция релизует массив А на основе массива array
+ * @param указатель на массив (эквивалентно array[]) 
+ * @param n переменная, отвечающая за размер массива
+ */
+void array_from_array(const int *array, const size_t n);
