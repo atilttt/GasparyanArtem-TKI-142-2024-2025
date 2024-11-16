@@ -73,7 +73,7 @@ void user_input(size_t *array, const size_t n) {
 
 void print_array(const size_t *array, const size_t n) {
     for (size_t i = 0; i < n; ++i) {
-        printf("Ваш массив = %d\n", array[i]);
+        printf("Ваш массив = %zu\n", array[i]);
     }
 }
 
