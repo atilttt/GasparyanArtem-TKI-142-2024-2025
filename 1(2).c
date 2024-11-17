@@ -18,7 +18,6 @@ int main(void)
     printf("Введите вес в граммах:");
     scanf("%lf", &x);
     printf("%lf", result(x));
-
     return 0;
 }
 
