@@ -16,14 +16,15 @@ int main(void)
     int dependet = pozitiv_input();
     switch (dependet)
     { 
-        case RANDOM: 
-            random_filling(array, n);
-            break;
         case INPUT:
             user_input_filling(array, n);
             break;
+        case RANDOM: 
+            random_filling(array, n);
+            break;
         default:
             printf("Произошла ошибка, скорее всего вы ввели некорректное число:)\n");
+            exit(EXIT_FAILURE);
     }
     print_array(array, n);
 
@@ -33,9 +34,14 @@ int main(void)
     printf("Введите произвольное целочисленное число k\n");
     const int k = input();
     array = elementary_numbers(array, &n, k); 
+    printf("Ваш массив с числом k\n");
+    print_array(array, n);
+
 
     printf("Создадим массив A на основе array\n");
     array_from_array(array, n);
+    printf("Ваш массив А\n");
+    print_array(array, n);
 
     free(array); 
     return 0;
@@ -48,6 +54,7 @@ int input(void)
     if (result != 1)
     { 
         errno = EIO;
+        printf("Ошибка ввода\n");
         exit(EXIT_FAILURE);
     }
     return value;
@@ -59,6 +66,7 @@ int pozitiv_input(void)
     if (value < 0)
     { 
         errno = EINVAL;
+        printf("Ошибка ввода\n");
         exit(EXIT_FAILURE);
     } 
     return value;
@@ -84,7 +92,7 @@ void print_array(const int *array, const size_t n)
 { 
     for (size_t i = 0; i < n; ++i)
     { 
-        printf("Ваш массив: %d\n", array[i]);
+        printf("Ваш массив array: %d\n", array[i]);
     }
 }
 
@@ -103,33 +111,35 @@ void replacement(int *array, const size_t n)
 
 int* elementary_numbers(int *array, size_t *n, const int k)
 { 
-    int *new_array = (int*)malloc((*n * 2) * sizeof(int)); 
+   size_t counter = 0;
+    for (size_t i = 1; i < *n; ++i) {
+        if (array[i] % i == 0) {
+            counter++;
+        }
+    }
+
+    size_t new_size = *n + counter;
+    int* new_array = (int*)malloc(new_size * sizeof(int));
     if (new_array == NULL)
     { 
         printf("Произошла ошибка выделения памяти\n");
         exit(EXIT_FAILURE);
     }
-    
-    size_t index = 0; 
-    for (size_t i = 0; i < *n; ++i)
-    {
-        new_array[index++] = array[i]; 
-        if (i != 0 && array[i] % i == 0)
-        {
-            new_array[index++] = k; 
+
+    size_t new_counter = 0;
+    new_array[new_counter++] = array[0];
+
+    for (size_t i = 1; i < *n; ++i) {
+        new_array[new_counter++] = array[i];
+        if (array[i] % i == 0) {
+            new_array[new_counter++] = k;
         }
     }
 
-    printf("Ваш массив с числом K:\n");
-    for (size_t j = 0; j < index; ++j)
-    { 
-        printf("%d ", new_array[j]);
-    }
-    printf("\n");
-
-    free(array);        
-    *n = index;          
-    return new_array;    
+    free(array);
+    array = new_array;
+    *n = new_size;          
+    return array;
 }
 
 void array_from_array(const int *array, const size_t n)
@@ -138,7 +148,7 @@ void array_from_array(const int *array, const size_t n)
     if (A == NULL)
     { 
         printf("Произошла ошибка выделения памяти\n");
-        abort();
+        exit(EXIT_FAILURE);
     }
 
     for (size_t i = 0; i < n; ++i)
@@ -153,10 +163,5 @@ void array_from_array(const int *array, const size_t n)
         }
     }
     
-    for (size_t i = 0; i < n; ++i)
-    { 
-        printf("Ваш массив A, построенный на основе array: %d\n", A[i]);
-    }
-
     free(A);    
 }

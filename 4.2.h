@@ -18,12 +18,11 @@ int input(void);
 int pozitiv_input(void);
 
 /**
- * @param RANDOM заполнение рандомными числами
  * @param INPUT заполнение пользователем
+ * @param RANDOM заполнение рандомными числами
  */
 enum choice { 
-    RANDOM = 1, 
-    INPUT = 0
+    INPUT = 0, RANDOM = 1
 };
 
 /**
@@ -60,7 +59,7 @@ void replacement(int *array, const size_t n);
  * @param n переменная, отвечающая за размер массива 
  * @param k переменная, хранящая в себе произвольное число, заданное пользователем
  */
-int* elementary_numbers(int *array, const size_t *n, const int k);
+int* elementary_numbers(int *array, size_t *n, const int k);
 
 /**
  * @brief функция релизует массив А на основе массива array
