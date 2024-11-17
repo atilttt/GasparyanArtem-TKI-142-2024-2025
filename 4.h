@@ -17,11 +17,11 @@ int input(void);
 int pozitiv_input(void);
 
 /**
- * @param RANDOM отвечает за рандомнное заполнение массива
  * @param INPUT отвечате за заполнение массива из потока ввода
+ * @param RANDOM отвечает за рандомнное заполнение массива
  */
 enum choice{ 
-    RANDOM = 1, INPUT = 0
+    INPUT = 0, RANDOM = 1
 };
 
 /**

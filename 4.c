@@ -8,19 +8,19 @@ int main(void)
     if (array == NULL)
     { 
         printf("Произошла ошибка\n");
-        abort();
+        exit(EXIT_FAILURE);
     }
     
     printf("Пожалуйста, выберите каким методом вы хотите воспользоваться.\n");
-    printf("Метод рандомного заполнения - 1, метод заполнения с помощью ввода - 0\n");
+    printf("Метод заполнения с помощью ввода - 0, метод рандомного заполнения - 1\n");
     int dependet = pozitiv_input();
     switch(dependet)
     { 
-        case RANDOM:
-            random_filling(array, n);
-            break;
         case INPUT:
             user_input(array, n);
+            break;
+        case RANDOM:
+            random_filling(array, n);
             break;
         default:
             printf("Вы где-то ошиблись, скорее всего это неверный ввод\n");
@@ -44,6 +44,7 @@ int input(void) {
     int result = scanf("%d", &value);
     if (result != 1) {
         errno = EIO;
+        perror("Ошибка ввода\n");
         exit(EXIT_FAILURE);
     }
     return value;
@@ -53,6 +54,7 @@ int pozitiv_input(void) {
     int value = input();
     if (value < 0) {
         errno = EINVAL;
+        perror("Ошибка ввода\n");
         exit(EXIT_FAILURE);
     }
     return value;
