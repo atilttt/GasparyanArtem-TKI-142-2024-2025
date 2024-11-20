@@ -104,7 +104,7 @@ void interval_check(const double a, const double b)
 
 void check_step(const double step)
 {
-    if (step < DBL_EPSILON)
+    if (step <= DBL_EPSILON)
     { 
         errno = EINVAL; 
         perror("Step value is set incorrectly\n");
@@ -126,9 +126,9 @@ double get_sum_func_row(const double x, const double eps)
 { 
     double current = get_current(x, 0); // Начальное значение current
     double sum = 0.0;
-    int k = 0; 
+    int k = 1; 
 
-    while (fabs(current) > eps)
+    while (fabs(current) >= eps)
     { 
         sum += current;
         current = get_current(x, k);
