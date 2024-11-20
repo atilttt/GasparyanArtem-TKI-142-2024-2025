@@ -20,7 +20,9 @@ int main(void)
             user_input_filling(array, n);
             break;
         case RANDOM: 
-            random_filling(array, n);
+            const int min = input();
+            const int max = input();
+            random_filling(array, n, min, max);
             break;
         default:
             printf("Произошла ошибка, скорее всего вы ввели некорректное число:)\n");
@@ -72,11 +74,11 @@ int pozitiv_input(void)
     return value;
 }
 
-void random_filling(int *array, const size_t n)
+void random_filling(int *array, const size_t n, const int min, const int max)
 { 
     for (size_t i = 0; i < n; ++i)
     { 
-        array[i] = (rand() % n); 
+        array[i] = (rand() % (max - min - 1) + min); 
     }
 }
 
@@ -90,20 +92,45 @@ void user_input_filling(int *array, const size_t n)
 
 void print_array(const int *array, const size_t n)
 { 
+    printf("Ваш массив array: \n");
     for (size_t i = 0; i < n; ++i)
     { 
-        printf("Ваш массив array: %d\n", array[i]);
+        printf("{%d,}\n", array[i]);
     }
+}
+
+void check_arrey(int *array)
+{ 
+    if (array == NULL)
+    { 
+        printf("Произошла ошибка\n");
+        exit(1);
+    }
+}
+
+int* copy_array(const int* array, const size_t n)
+{ 
+    check_arrey(array);
+    int *new_array = (int*)malloc(n * sizeof(int));
+    for (size_t i = 0; i < n; ++i)
+    { 
+        new_array[i] = array[i];
+    }
+
+    return new_array;
 }
 
 void replacement(int *array, const size_t n)
 { 
+    check_arrey(array);
+    int array_2 = copy_array;
+    check_arrey(array_2);
     for (size_t i = 0; i < n; ++i)
     {
-        if (array[i] < 0)
+        if (array_2[i] < 0)
         { 
-            array[i] = 0;
-            printf("Первый отрицательный элемент был заменен на ноль: %d\n", array[i]);
+            array_2[i] = 0;
+            printf("Первый отрицательный элемент был заменен на ноль: %d\n", array_2[i]);
             break;
         }
     }

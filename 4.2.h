@@ -30,7 +30,7 @@ enum choice {
  * @param array указатель на массив (эквивалентно array[])
  * @param n переменная, отвечающая за размер массива
  */
-void random_filling(int *array, const size_t n);
+void random_filling(int *array, const size_t n, const int min, const int max);
 
 /**
  * @brief функция, выполняюзая заполнение массива с помощью пользовательского ввода
@@ -45,6 +45,19 @@ void user_input_filling(int *array, const size_t n);
  * @param n переменная, отвечающая за размер массива
  */
 void print_array(const int *array, const size_t n);
+
+/**
+ * @brief функция, которая проверяет адресс указателя
+ * @param arrey указатель на массив(эквивалентно array[])
+ */
+void check_arrey(int *arrey);
+
+/**
+ * @brief функция создает новый массив на основе прошлого 
+ * @param arrey указатель на массив (эквивалентно array[])
+ * @param n переменная, отвечающая за размер массива
+ */
+int* copy_array(const int *array, const size_t n);
 
 /**
  * @brief функция находит первый отрицательный элемент в массиве и меняет его на 0
