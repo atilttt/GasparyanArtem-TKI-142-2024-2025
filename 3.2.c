@@ -49,7 +49,7 @@ double get_sum_first_n(const int n);
  * @param e значение заданного числа е
  * @return рассчитанное значение суммы
  */
-double get_sum_dependet_e(const int n, const double e);
+double get_sum_dependet_e(const double e);
 
 /**
  * @brief точка входа в программу 
@@ -122,13 +122,13 @@ double pozitiv_double(void)
 }
 
 double next_term(const double previous_term, const int k) {
-    return previous_term * (pow(k, 4) / k);
+    return (previous_term * (pow(k, 4) / k)) - 1;
 }
 
 double get_sum_first_n(const int n)
 {
-    double sum = 1.0;
-    double term = 1.0;  // Начальный член a_1 = 1^4 / 1!
+    double term = 1.0; 
+    double sum = term; // Начальный член a_1 = 1^4 / 1!
 
     for (int k = 1; k < n; ++k) {
         term = next_term(term, k);
@@ -140,14 +140,14 @@ double get_sum_first_n(const int n)
 
 double get_sum_dependet_e(const double e) 
 {
-    double sum = 0.0;
+    double sum = 1.0;
     double term = 1.0;  // Начальный член a_1 = 1^4 / 1!
     int k = 1;
-    while (term >= e + DBL_EPSILON)
+    while (fabs(term) >= e + DBL_EPSILON)
     {
-        k++;
-        term = next_term(term, k);
         sum += term;
+        term = next_term(term, k);
+        k++;   
     }
     
     return sum;
