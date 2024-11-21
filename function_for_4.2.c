@@ -21,12 +21,11 @@ int pozitiv_input(void) {
 
 int* create_array(const size_t n) {
     int *array = (int *)malloc(n * sizeof(int));
-    check_pointer(array);
+    check_array(array);
     return array;
 }
 
 int* copy_array(const int *array, const size_t n) {
-    check_pointer(array);
     int *new_array = create_array(n);
     for (size_t i = 0; i < n; ++i) {
         new_array[i] = array[i];
@@ -42,7 +41,6 @@ void check_array(const int *array) {
 }
 
 void random_filling(int *array, const size_t n) {
-    check_pointer(array);
     printf("Введите минимальное и максимальное значения:\n");
     int min = input();
     int max = input();
@@ -57,7 +55,6 @@ void random_filling(int *array, const size_t n) {
 }
 
 void user_input_filling(int *array, const size_t n) {
-    check_pointer(array);
     for (size_t i = 0; i < n; ++i) {
         printf("Введите элемент %zu:\n", i + 1);
         array[i] = input();
@@ -65,7 +62,6 @@ void user_input_filling(int *array, const size_t n) {
 }
 
 void print_array(const int *array, const size_t n) {
-    check_pointer(array);
     printf("Ваш массив:\n");
     for (size_t i = 0; i < n; ++i) {
         printf("%d ", array[i]);
@@ -74,7 +70,6 @@ void print_array(const int *array, const size_t n) {
 }
 
 void replacement(int *array, const size_t n) {
-    check_pointer(array);
     for (size_t i = 0; i < n; ++i) {
         if (array[i] < 0) {
             array[i] = 0;
@@ -84,7 +79,6 @@ void replacement(int *array, const size_t n) {
 }
 
 int* elementary_numbers(int *array, size_t *n, const int k) {
-    check_pointer(array);
     size_t counter = 0;
 
     for (size_t i = 0; i < *n; ++i) {
@@ -110,7 +104,6 @@ int* elementary_numbers(int *array, size_t *n, const int k) {
 }
 
 int* array_from_array(const int *array, const size_t n) {
-    check_pointer(array);
     int *A = create_array(n);
 
     for (size_t i = 0; i < n; ++i) {

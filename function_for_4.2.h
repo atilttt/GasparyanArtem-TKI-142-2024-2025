@@ -71,12 +71,6 @@ void user_input_filling(int *array, const size_t n);
 void print_array(const int *array, const size_t n);
 
 /**
- * @brief функция, которая проверяет адресс указателя
- * @param arrey указатель на массив(эквивалентно array[])
- */
-void check_arrey(int *arrey);
-
-/**
  * @brief функция создает новый массив на основе прошлого 
  * @param arrey указатель на массив (эквивалентно array[])
  * @param n переменная, отвечающая за размер массива
