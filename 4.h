@@ -18,6 +18,13 @@ int input(void);
 int pozitiv_input(void);
 
 /**
+ * @brief функция, создающая массив
+ * @param n переменная, отвечающая за размер массива
+ * @return возвращает созданный массив
+ */
+int* create_array(const size_t n);
+
+/**
  * @param INPUT отвечате за заполнение массива из потока ввода
  * @param RANDOM отвечает за рандомнное заполнение массива
  */
@@ -32,7 +39,7 @@ enum choice{
  * @param min переменная, хранящая в себе минимальное число
  * @param max переменная, хранящая в себе максимальное число
  */
-void random_filling(int *array, const size_t n, const int min, const int max);
+void random_filling(int *array, const size_t n);
 
 /**
  * @brief заполняет массив пользовательским вводом
@@ -58,7 +65,7 @@ void check_array(int * array);
  * @brief создает новый массив на копии старого
  * @param array указатель на массив 
  */
-void copy_array(const int *array, const size_t n);
+int* copy_array(const int *array, const size_t n);
 
 /**
  * @brief заменяет последние k элементов массива на противоположные
@@ -66,7 +73,7 @@ void copy_array(const int *array, const size_t n);
  * @param k переменная k
  * @param n переменная, отвечающая за размер массива
  */
-void check_elements_k(int *array, const int k, const size_t n);
+int* check_elements_k(int *array, const int k, const size_t n);
 
 /**
  * @brief функция находит элементы, кратные 3ом, и выводит их
