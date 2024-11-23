@@ -62,45 +62,47 @@ void user_input_filling(int *array, const size_t n) {
 }
 
 void print_array(const int *array, const size_t n) {
-    printf("Ваш массив:\n");
+    printf("Ваш массив:\n{");
     for (size_t i = 0; i < n; ++i) {
         printf("%d ", array[i]);
     }
-    printf("\n");
+    printf("}\n");
 }
 
 void replacement(int *array, const size_t n) {
+
+    int *array_2 = copy_array(array, n);
     for (size_t i = 0; i < n; ++i) {
-        if (array[i] < 0) {
-            array[i] = 0;
+        if (array_2[i] < 0) {
+            array_2[i] = 0;
             break;
         }
     }
+    print_array(array_2, n);
+    free(array_2);
 }
 
-int* elementary_numbers(int *array, size_t *n, const int k) {
-    size_t counter = 0;
-
-    for (size_t i = 0; i < *n; ++i) {
+void elementary_numbers(int *array, size_t *n, const int k) {
+    size_t counter = 0; 
+    for (size_t i = 0; i < *n; i++) { 
         if (array[i] % (i + 1) == 0) {
-            counter++;
+            ++counter;
         }
     }
 
-    size_t new_size = *n + counter;
-    int *new_array = create_array(new_size);
+    size_t new_n = *n + counter; 
+    int *new_array = copy_array(array, new_n);
 
-    size_t new_counter = 0;
-    for (size_t i = 0; i < *n; ++i) {
-        new_array[new_counter++] = array[i];
-        if (array[i] % (i + 1) == 0) {
-            new_array[new_counter++] = k;
+    size_t index = 0;
+    for (size_t j = 0; j < *n; j++) { 
+        new_array[index++] = array[j];
+        if (array[j] % (j + 1) == 0) { 
+            new_array[index++] = k;
         }
     }
 
+    print_array(new_array, new_n);
     free(array);
-    *n = new_size;
-    return new_array;
 }
 
 int* array_from_array(const int *array, const size_t n) {

@@ -3,7 +3,7 @@
 int main(void) {
     setlocale(LC_ALL, "Russian");
     printf("Введите размер массива\n");
-    const size_t n = pozitiv_input();
+    size_t n = pozitiv_input();
     int *array = create_array(n);
 
     printf("Выберите метод заполнения массива\n");
@@ -25,13 +25,10 @@ int main(void) {
 
     printf("Первый отрицательный элемент будет заменен на ноль.\n");
     replacement(array, n);
-    print_array(array, n);
-
     printf("Введите произвольное целочисленное число k:\n");
     const int k = input();
-    array = elementary_numbers(array, (size_t *)&n, k);
-    printf("Массив после добавления числа k:\n");
-    print_array(array, n);
+    printf("Массив после добавления числа k:\n");\
+    elementary_numbers(array, &n, k);
 
     printf("Создаем массив A на основе array.\n");
     int *A = array_from_array(array, n);

@@ -91,7 +91,7 @@ void replacement(int *array, const size_t n);
  * @param n переменная, отвечающая за размер массива 
  * @param k переменная, хранящая в себе произвольное число, заданное пользователем
  */
-int* elementary_numbers(int *array, size_t *n, const int k);
+void elementary_numbers(int *array, size_t *n, const int k);
 
 /**
  * @brief функция релизует массив А на основе массива array
