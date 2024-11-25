@@ -3,7 +3,7 @@
 #include <stdlib.h> 
 #include <errno.h>
 
-/**
+/*
  * @brief проверка введенного значения
  * @return возвращает значение
  */
