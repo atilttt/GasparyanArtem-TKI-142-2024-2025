@@ -1,4 +1,5 @@
 #ifndef FUNCTION_FOR_4_2_H
+
 #define FUNCTION_FOR_4_2_H
 
 #include <stdio.h> 
@@ -83,7 +84,14 @@ int* copy_array(const int *array, const size_t n);
  * @param array указатель на массив (эквивалентно array[])
  * @param n переменная, отвечающая за размер массива
  */
-void replacement(int *array, const size_t n);
+int* replacement(int *array, const size_t n);
+
+/**
+ * @brief функция выводит новый массив, в котором первый отрицательный элемент заменен на ноль
+ * @param *array указатель на массив (эквивалентно array[]) 
+ * @param n переменная, отвечающая за размер массива
+ */
+void print_replacement(int *array, const size_t n);
 
 /**
  * @brief функция находит элементарные числа и после них вставляет произвольное число, заданое пользователем

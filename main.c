@@ -24,7 +24,8 @@ int main(void) {
     print_array(array, n);
 
     printf("Первый отрицательный элемент будет заменен на ноль.\n");
-    replacement(array, n);
+    print_replacement(array, n);
+
     printf("Введите произвольное целочисленное число k:\n");
     const int k = input();
     printf("Массив после добавления числа k:\n");\

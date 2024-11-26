@@ -69,7 +69,7 @@ void print_array(const int *array, const size_t n) {
     printf("}\n");
 }
 
-void replacement(int *array, const size_t n) {
+int* replacement(int *array, const size_t n) {
 
     int *array_2 = copy_array(array, n);
     for (size_t i = 0; i < n; ++i) {
@@ -78,8 +78,16 @@ void replacement(int *array, const size_t n) {
             break;
         }
     }
-    print_array(array_2, n);
-    free(array_2);
+
+    return array_2;
+}
+
+void print_replacement(int *array, const size_t n)
+{ 
+    int* new_array = create_array(n);
+    new_array = replacement(array, n); 
+    print_array(new_array, n); 
+    free(new_array);
 }
 
 void elementary_numbers(int *array, size_t *n, const int k) {
