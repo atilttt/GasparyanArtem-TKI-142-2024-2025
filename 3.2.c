@@ -30,11 +30,10 @@ double pozitive_double(void);
 
 /**
  * @brief вычисляет следующий член последовательности при помощи рекуррентного выражения
- * @param previous_term значение предыдущего члена последовательности
  * @param k текущий индекс последовательности
  * @return значение следующего члена последовательности
  */
-double next_term(const double previous_term, const int k); // добавлено const //
+double next_term(const int k); // Убрали `previous_term`, добавили `const` //
 
 /**
  * @brief рассчитывает значение суммы первых n-членов последовательности
@@ -62,7 +61,7 @@ int main(void)
     printf("Please enter value e:\n");
     const double e = pozitive_double();
     printf("The sum of the first n terms of the sequence = %.3lf\n", get_sum_first_n(n));
-    printf("The sum of all the members of the sequence, not less than a given number e = %.3lf\n", get_sum_dependet_e(n, e));
+    printf("The sum of all the members of the sequence, not less than a given number e = %.3lf\n", get_sum_dependet_e(e));
 
     return 0; 
 }
@@ -82,9 +81,8 @@ int integer_input(void)
 
 int positive_int(void)
 {
-     int value =  integer_input();
-     
-        if (value < 0)
+    int value =  integer_input();
+    if (value < 0)
     { 
         errno = EIO;
         perror("Impossible value for n");
@@ -93,7 +91,6 @@ int positive_int(void)
 
     return value;
 }
-
 
 double input(void)
 { 
@@ -121,8 +118,8 @@ double pozitiv_double(void)
     return parameter;
 }
 
-double next_term(const double previous_term, const int k) {
-    return (previous_term * (pow(k, 4) / k)) - 1;
+double next_term(const int k) {
+    return -1 * (pow(k, 4) / k); 
 }
 
 double get_sum_first_n(const int n)
@@ -131,7 +128,7 @@ double get_sum_first_n(const int n)
     double sum = term; // Начальный член a_1 = 1^4 / 1!
 
     for (int k = 1; k < n; ++k) {
-        term = next_term(term, k);
+        term *= next_term(k); 
         sum += term;
     } 
 
@@ -146,7 +143,7 @@ double get_sum_dependet_e(const double e)
     while (fabs(term) >= e + DBL_EPSILON)
     {
         sum += term;
-        term = next_term(term, k);
+        term *= next_term(k); 
         k++;   
     }
     
