@@ -8,6 +8,7 @@
 #include <math.h>
 #include <time.h>
 #include <locale.h>
+#include <windows.h>  
 
 
 /**
@@ -48,7 +49,8 @@ void check_array(const int *array);
  * @param RANDOM заполнение рандомными числами
  */
 enum choice { 
-    INPUT = 0, RANDOM = 1
+    INPUT_TYPE = 0, 
+    RANDOM = 1
 };
 
 /**
@@ -93,13 +95,31 @@ int* replacement(int *array, const size_t n);
  */
 void print_replacement(int *array, const size_t n);
 
-/**
- * @brief функция находит элементарные числа и после них вставляет произвольное число, заданое пользователем
- * @param array указатель на массив (эквиваленто array[]) 
- * @param n переменная, отвечающая за размер массива 
- * @param k переменная, хранящая в себе произвольное число, заданное пользователем
+/** 
+ * @brief считает элементы массива, которые кратны своему номеру
+ * @param *array указатель на массив (эквивалентно array[])
+ * @param n переменная, отвечающая за размер массива
+ * @return возвращает кол-во таких элементов
  */
-void elementary_numbers(int *array, size_t *n, const int k);
+size_t count_elementary(const int *array, size_t n);
+
+/**
+ * @brief функция вставляет элемент k, после каждого элемента массива, кратного своему номеру
+ * @param *array указатель на массив (эквивалентно array[])
+ * @param n переменная, отвечающая за размер массива
+ * @param counter переменная-счетчик (хранит в себе кол-во элементов, кратных своему номеру)
+ * @param k переменная, хранящая в себе произвольное значение, введенное пользователем, которое вставляется после каждого элемента, кратного своему номеру
+ * @return массив с вставленным в него числом K
+ */
+int* create_resized_array(const int *array, const size_t n, const size_t counter, const int k);
+
+/**
+ * @brief функция, которая ввыводит массив с числом K
+ * @param *array указатель на массив
+ * @param n переменная, отвечающая за размер массива
+ * @param k произвольное значение введенное пользователем
+ */
+void print_elementary_numbers(int *array, const size_t n, const int k);
 
 /**
  * @brief функция релизует массив А на основе массива array

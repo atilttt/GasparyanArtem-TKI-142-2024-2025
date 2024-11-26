@@ -2,6 +2,11 @@
 
 int main(void) {
     setlocale(LC_ALL, "Russian");
+    SetConsoleCP(65001);
+    SetConsoleOutputCP(65001); 
+
+
+
     printf("Введите размер массива\n");
     size_t n = pozitiv_input();
     int *array = create_array(n);
@@ -10,7 +15,7 @@ int main(void) {
     printf("Метод 1 - заполнение рандомными числами, Метод 0 - заполнение с клавиатуры\n");
     int dependet = pozitiv_input();
     switch (dependet) {
-        case INPUT:
+        case INPUT_TYPE:
             user_input_filling(array, n);
             break;
         case RANDOM:
@@ -29,7 +34,7 @@ int main(void) {
     printf("Введите произвольное целочисленное число k:\n");
     const int k = input();
     printf("Массив после добавления числа k:\n");\
-    elementary_numbers(array, &n, k);
+    print_elementary_numbers(array, n, k);
 
     printf("Создаем массив A на основе array.\n");
     int *A = array_from_array(array, n);

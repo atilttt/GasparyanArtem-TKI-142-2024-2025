@@ -90,27 +90,35 @@ void print_replacement(int *array, const size_t n)
     free(new_array);
 }
 
-void elementary_numbers(int *array, size_t *n, const int k) {
-    size_t counter = 0; 
-    for (size_t i = 0; i < *n; i++) { 
+size_t count_elementary(const int *array, size_t n) {
+    size_t counter = 0;
+    for (size_t i = 0; i < n; i++) {
         if (array[i] % (i + 1) == 0) {
             ++counter;
         }
     }
+    return counter;
+}
 
-    size_t new_n = *n + counter; 
-    int *new_array = copy_array(array, new_n);
+int* create_resized_array(const int *array, const size_t n, const size_t counter, const int k) {
+    size_t new_n = n + counter;
+    int *new_array = create_array(new_n);
 
     size_t index = 0;
-    for (size_t j = 0; j < *n; j++) { 
-        new_array[index++] = array[j];
-        if (array[j] % (j + 1) == 0) { 
+    for (size_t i = 0; i < n; i++) {
+        new_array[index++] = array[i];
+        if (array[i] % (i + 1) == 0) {
             new_array[index++] = k;
         }
     }
+    return new_array;
+}
 
-    print_array(new_array, new_n);
-    free(array);
+void print_elementary_numbers(int *array, const size_t n, const int k) {
+    size_t counter = count_elementary(array, n);
+    int *new_array = create_resized_array(array, n, counter, k);
+    print_array(new_array, n + counter);
+    free(new_array);
 }
 
 int* array_from_array(const int *array, const size_t n) {
