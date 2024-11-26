@@ -108,7 +108,7 @@ double input(void)
 double pozitiv_double(void)
 { 
     double parameter = input();
-    if (parameter < DBL_EPSILON)
+    if (parameter <= DBL_EPSILON)
     { 
         errno = EIO;
         perror("Input error\n");
