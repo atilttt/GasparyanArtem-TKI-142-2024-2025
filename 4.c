@@ -41,7 +41,7 @@ int main(void) {
 }
 
 int input(void) {
-    int value;
+    int value = 0;
     if (scanf("%d", &value) != 1) {
         perror("Ошибка ввода");
         exit(EXIT_FAILURE);
@@ -103,7 +103,7 @@ void check_array(const int *array) {
 }
 
 int* copy_array(const int *array, const size_t n) {
-    int* new_array = (int*)malloc(n * sizeof(int));
+    int* new_array = create_array(n);
     check_array(new_array);
 
     for (size_t i = 0; i < n; ++i) {
