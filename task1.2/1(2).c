@@ -1,4 +1,13 @@
 #include <stdio.h>
+#include <errno.h>
+#include <stdlib.h>
+
+/**
+ * @brief функия, получающая значение из потока ввода
+ * @return возвращает оишбку, в случае если значение некорректное.
+ */
+int input(void);
+
 
 /**
  * @brief перевод значения веса в граммах в унции
@@ -20,6 +29,20 @@ int main(void)
     printf("%lf", result(x));
 
     return 0;
+}
+
+int input(void)
+{ 
+    double value = 0.0;
+    int result = scanf("%lf", &value);
+    if (result != 1)
+    { 
+        errno = EIO;
+        perror("Input value is discorrect\n");
+        exit(EXIT_FAILURE);
+    }
+
+    return value;
 }
 
 double result(double x)
