@@ -22,10 +22,9 @@ double result(double x);
  * @return 0 в случае успеха
  */
 int main(void) 
-{ 
-    double x;
+{  
     printf("Введите вес в граммах:");
-    scanf("%lf", &x);
+    double x = input();
     printf("%lf", result(x));
 
     return 0;
