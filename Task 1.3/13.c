@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <errno.h>
+#include <stdlib.h>
 
 /*
  * @brief рассчитывает работу эл.тока по формуле
@@ -40,9 +42,12 @@ double input()
 { 
     double value = 0.0;
     int result = scanf("%lf", &value);
-    if (result != 2)
+    if (result != 1)
     {
+        errno = EIO;
         perror("Invalid input!");
+        exit(EXIT_FAILURE);
     }
+    
     return value;
 }
