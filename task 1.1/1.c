@@ -25,7 +25,7 @@ int main()
     const double x = -2.9;
     const double y = 15.5;
     const double z = 1.5;
-    printf("%lf\n%lf", getA(x, y, z), getB(x, y, z));
+    printf("%lf\n%lf", getA(x, y, z),  getB(x, y, z));
 
     return 0;
 }
