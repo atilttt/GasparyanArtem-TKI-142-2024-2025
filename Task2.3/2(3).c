@@ -78,4 +78,5 @@ double Path(const double t1, const double t2, const double t3, const double v1, 
         return t1 + t2 + half_path / v3; //если путник находится на третьем участке//
     }
 
+    return t1 + t2 + t3;
 }
