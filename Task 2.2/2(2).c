@@ -2,12 +2,13 @@
 #include <math.h> 
 #include <stdlib.h> 
 #include <errno.h>
+#include <float.h>
 
 /** 
  * @brief проверка введенного значения
  * @return возвращает значение
  */
-double input(); 
+double input(void); 
 
 /**
  * @brief рассчитывает значение функции по формуле
@@ -27,10 +28,10 @@ double getB(const double x);
  * @brief точка входа в программу
  * @return 0 в случае успеха 
  */
-int main() 
+int main(void) 
 { 
     const double x = input();
-    if (x < 2) 
+    if (x < 2 - DBL_EPSILON) 
     { 
         printf("функция равна = %.2lf", getA(x));
     }
