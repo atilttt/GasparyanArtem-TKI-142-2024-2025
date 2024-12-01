@@ -47,12 +47,11 @@ double get_function(const double x);
 int main(void)
 {
     printf("please enter interval value\n"); 
-    const double start = pozitiv_double();
-    const double end = pozitiv_double();
+    const double start = input();
+    const double end = input();
     interval_check(start, end);
     printf("please enter step\n");
-    const double step = input();
-    step_check(step);
+    const double step = pozitiv_double();
 
     for (double x = start; x <= end + DBL_EPSILON; x += step)
     { 
