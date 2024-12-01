@@ -104,16 +104,6 @@ void interval_check(const double start, const double end)
     }
 }
 
-void step_check(const double step)
-{ 
-    if (step <= DBL_EPSILON)
-    { 
-        errno = EIO;
-        perror("Step input error\n");
-        exit(EXIT_FAILURE);
-    }
-}
-
 bool check_value_x(const double x)
 {
     return x > DBL_EPSILON; 
