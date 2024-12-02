@@ -36,9 +36,9 @@ int main(void) {
     const int k = input();
     printf("Массив после добавления числа k:\n");
     size_t counter = count_elementary(array, n);
-    int *new_array = create_resized_array(array, n, counter, k);
-    print_array(new_array, n + counter);
-    free(new_array);
+    int *new_array_2 = create_resized_array(array, n, counter, k);
+    print_array(new_array_2, n + counter);
+    free(new_array_2);
     
     
     printf("Создаем массив A на основе array.\n");
