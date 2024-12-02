@@ -58,14 +58,8 @@ int main(void)
     const double b = input();
     printf("Please enter step value:\n");
     const double step = input();
-
-    // Проверка входных данных
     interval_check(a, b);
     check_step(step);
-
-    printf("\n**Results**\n");
-
-    // Итерация по точкам в заданном интервале с шагом
     for (double x = a; x <= b + DBL_EPSILON; x += step)
     {
         if (fabs(x) >= 1.0 - DBL_EPSILON)  { // Проверка области определения функции (ООФ)
@@ -106,7 +100,7 @@ void interval_check(const double a, const double b)
 
 void check_step(const double step)
 {
-    if (step <= DBL_EPSILON) // Шаг должен быть положителен и больше машинного эпсилона
+    if (step <= DBL_EPSILON)
     { 
         errno = EINVAL; 
         perror("Step value is set incorrectly\n");
@@ -128,17 +122,16 @@ double get_current(const double x, const int k)
 
 double get_sum_func_row(const double x, const double eps)
 { 
-    // Переменные для текущего элемента и суммы
     double current = get_current(x, 0); 
     double sum = 0.0;
-    int k = 0; // Начинаем с k = 0
+    int k = 0; 
 
     while (fabs(current) >= eps)
     { 
         sum += current;
-        k++; // Переходим к следующему индексу
+        k++; 
         current = get_current(x, k); 
     } 
 
-    return sum; // Возвращаем сумму
+    return sum;
 }
