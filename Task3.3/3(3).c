@@ -14,14 +14,12 @@ double input(void);
  * @brief функция, проверяющая заданный интервал
  * @param a начальная точка заданного интервала
  * @param b конечная точка заданного интервала
- * @return возвращает ошибку в случае, если интервал был задан неверно
  */
 void interval_check(const double a, const double b);
 
 /**
  * @brief функция, проверяющая заданный шаг 
  * @param step значение заданного шага
- * @return возвращает ошибку в случае, если шаг был задан неверно
  */
 void check_step(const double step);
 
@@ -42,35 +40,39 @@ double get_current(const double x, const int k);
 
 /**
  * @brief рассчитывает сумму функционального ряда
- * @param a начальная точка интервала
- * @param b конечная точка интервала
+ * @param x точка, в которой нужно вычислить сумму ряда
  * @param eps заданная точность 
  * @return рассчитанное значение суммы функционального ряда
  */
 double get_sum_func_row(const double x, const double eps);
 
 /** 
- * @brief точка входа в программу
+ * @brief Главная точка входа в программу
  * @return 0 в случае успеха
  */
 int main(void)
 {
-    const double eps = pow(30, -5);
-    printf("Please enter interval value\n");
+    const double eps = 1e-5; // более читаемая запись для точности
+    printf("Please enter interval values (start and end):\n");
     const double a = input(); 
     const double b = input();
-    printf("Please enter step value\n");
+    printf("Please enter step value:\n");
     const double step = input();
 
+    // Проверка входных данных
     interval_check(a, b);
     check_step(step);
 
+    printf("\n**Results**\n");
+
+    // Итерация по точкам в заданном интервале с шагом
     for (double x = a; x <= b + DBL_EPSILON; x += step)
     {
-        if (x > -1 - DBL_EPSILON && x < 1 + DBL_EPSILON)  { //изменение ООФ//
-            printf("the function does not exist at this point\n");
-        }else {
-            printf("\nx = %.2f\t\tf(x) = %.6f\t\tS(x) = %.6f\n", x, get_function(x), get_sum_func_row(x, eps));
+        if (fabs(x) >= 1.0 - DBL_EPSILON)  { // Проверка области определения функции (ООФ)
+            printf("x = %.2f: the function does not exist at this point\n", x);
+        } else {
+            printf("x = %.2f\tf(x) = %.6f\tS(x) = %.6f\n", 
+                   x, get_function(x), get_sum_func_row(x, eps));
         }
 
     }
@@ -94,7 +96,7 @@ double input(void)
 
 void interval_check(const double a, const double b)
 { 
-    if (b - a < DBL_EPSILON)
+    if (a >= b) // a должно быть меньше b
     {
         errno = EINVAL; 
         perror("Interval value is set incorrectly\n");
@@ -104,7 +106,7 @@ void interval_check(const double a, const double b)
 
 void check_step(const double step)
 {
-    if (step <= DBL_EPSILON)
+    if (step <= DBL_EPSILON) // Шаг должен быть положителен и больше машинного эпсилона
     { 
         errno = EINVAL; 
         perror("Step value is set incorrectly\n");
@@ -114,26 +116,29 @@ void check_step(const double step)
 
 double get_function(const double x)
 {   
+    // Основная функция
     return (1.0 / 4.0) * log((1 + x) / (1 - x)) + (1.0 / 2.0) * atan(x); 
 }
 
-double get_current(const double x, int k)
+double get_current(const double x, const int k)
 { 
+    // Расчет элемента ряда
     return pow(x, 4 * k + 1) / (4 * k + 1);
 }
 
 double get_sum_func_row(const double x, const double eps)
 { 
-    double current = get_current(x, 0); // Начальное значение current
+    // Переменные для текущего элемента и суммы
+    double current = get_current(x, 0); 
     double sum = 0.0;
-    int k = 1; 
+    int k = 0; // Начинаем с k = 0
 
     while (fabs(current) >= eps)
     { 
         sum += current;
-        current = get_current(x, k);
-        k++;
+        k++; // Переходим к следующему индексу
+        current = get_current(x, k); 
     } 
 
-    return sum;
+    return sum; // Возвращаем сумму
 }
