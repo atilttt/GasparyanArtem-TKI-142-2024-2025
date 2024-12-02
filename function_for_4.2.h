@@ -88,13 +88,6 @@ int* copy_array(const int *array, const size_t n);
  */
 int* replacement(int *array, const size_t n);
 
-/**
- * @brief функция выводит новый массив, в котором первый отрицательный элемент заменен на ноль
- * @param *array указатель на массив (эквивалентно array[]) 
- * @param n переменная, отвечающая за размер массива
- */
-void print_replacement(int *array, const size_t n);
-
 /** 
  * @brief считает элементы массива, которые кратны своему номеру
  * @param *array указатель на массив (эквивалентно array[])
@@ -112,14 +105,6 @@ size_t count_elementary(const int *array, size_t n);
  * @return массив с вставленным в него числом K
  */
 int* create_resized_array(const int *array, const size_t n, const size_t counter, const int k);
-
-/**
- * @brief функция, которая ввыводит массив с числом K
- * @param *array указатель на массив
- * @param n переменная, отвечающая за размер массива
- * @param k произвольное значение введенное пользователем
- */
-void print_elementary_numbers(int *array, const size_t n, const int k);
 
 /**
  * @brief функция релизует массив А на основе массива array

@@ -29,20 +29,26 @@ int main(void) {
     print_array(array, n);
 
     printf("Первый отрицательный элемент будет заменен на ноль.\n");
-    print_replacement(array, n);
+    int* new_array = create_array(n);
+    new_array = replacement(array, n); 
+    print_array(new_array, n); 
+    free(new_array);
 
     printf("Введите произвольное целочисленное число k:\n");
     const int k = input();
     printf("Массив после добавления числа k:\n");\
-    print_elementary_numbers(array, n, k);
+    size_t counter = count_elementary(array, n);
+    int *new_array_2 = create_resized_array(array, n, counter, k);
+    print_array(new_array_2, n + counter);
+    free(new_array_2);
 
     printf("Создаем массив A на основе array.\n");
-    int *A = array_from_array(array, n);
+    int *arr = array_from_array(array, n);
     printf("Массив A:\n");
-    print_array(A, n);
+    print_array(arr, n);
 
     free(array);
-    free(A);
+    free(arr);
 
     return 0;
 }

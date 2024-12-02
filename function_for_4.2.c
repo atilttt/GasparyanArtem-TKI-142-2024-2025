@@ -82,14 +82,6 @@ int* replacement(int *array, const size_t n) {
     return array_2;
 }
 
-void print_replacement(int *array, const size_t n)
-{ 
-    int* new_array = create_array(n);
-    new_array = replacement(array, n); 
-    print_array(new_array, n); 
-    free(new_array);
-}
-
 size_t count_elementary(const int *array, size_t n) {
     size_t counter = 0;
     for (size_t i = 0; i < n; i++) {
@@ -114,22 +106,15 @@ int* create_resized_array(const int *array, const size_t n, const size_t counter
     return new_array;
 }
 
-void print_elementary_numbers(int *array, const size_t n, const int k) {
-    size_t counter = count_elementary(array, n);
-    int *new_array = create_resized_array(array, n, counter, k);
-    print_array(new_array, n + counter);
-    free(new_array);
-}
-
 int* array_from_array(const int *array, const size_t n) {
-    int *A = create_array(n);
+    int *arr = create_array(n);
 
     for (size_t i = 0; i < n; ++i) {
         if ((i + 1) % 2 == 0) {
-            A[i] = (i - 1) * array[i];
+            arr[i] = (i - 1) * array[i];
         } else {
-            A[i] = array[i] * i * 2;
+            arr[i] = array[i] * i * 2;
         }
     }
-    return A;
+    return arr;
 }
