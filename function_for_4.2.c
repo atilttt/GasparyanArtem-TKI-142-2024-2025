@@ -26,6 +26,7 @@ int* create_array(const size_t n) {
 }
 
 int* copy_array(const int *array, const size_t n) {
+    check_array(array);
     int *new_array = create_array(n);
     for (size_t i = 0; i < n; ++i) {
         new_array[i] = array[i];
@@ -41,6 +42,7 @@ void check_array(const int *array) {
 }
 
 void random_filling(int *array, const size_t n) {
+    check_array(array);
     printf("Введите минимальное и максимальное значения:\n");
     int min = input();
     int max = input();
@@ -55,6 +57,7 @@ void random_filling(int *array, const size_t n) {
 }
 
 void user_input_filling(int *array, const size_t n) {
+    check_array(array);
     for (size_t i = 0; i < n; ++i) {
         printf("Введите элемент %zu:\n", i + 1);
         array[i] = input();
@@ -62,6 +65,7 @@ void user_input_filling(int *array, const size_t n) {
 }
 
 void print_array(const int *array, const size_t n) {
+    check_array(array);
     printf("Ваш массив:\n{");
     for (size_t i = 0; i < n; ++i) {
         printf("%d ", array[i]);
