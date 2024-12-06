@@ -5,14 +5,12 @@ int main(void) {
     SetConsoleCP(65001);
     SetConsoleOutputCP(65001); 
 
-
-
     printf("Введите размер массива\n");
-    size_t n = pozitiv_input();
+    size_t n = (size_t)pozitiv_input();
     int *array = create_array(n);
 
     printf("Выберите метод заполнения массива\n");
-    printf("Метод 1 - заполнение рандомными числами, Метод 0 - заполнение с клавиатуры\n");
+    printf("Метод %d - заполнение рандомными числами, Метод %d - заполнение с клавиатуры\n", RANDOM, INPUT_TYPE);
     int dependet = pozitiv_input();
     switch (dependet) {
         case INPUT_TYPE:
@@ -29,8 +27,7 @@ int main(void) {
     print_array(array, n);
 
     printf("Первый отрицательный элемент будет заменен на ноль.\n");
-    int* new_array = create_array(n);
-    new_array = replacement(array, n); 
+    int* new_array = replacement(array, n); 
     print_array(new_array, n); 
     free(new_array);
 
