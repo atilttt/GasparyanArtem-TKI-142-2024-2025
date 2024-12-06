@@ -49,7 +49,7 @@ void check_array(const int *array);
  * @param RANDOM заполнение рандомными числами
  */
 enum choice { 
-    INPUT_TYPE = 0, 
+    INPUT_TYPE = 2, 
     RANDOM = 1
 };
 

@@ -46,7 +46,7 @@ void random_filling(int *array, const size_t n) {
     printf("Введите минимальное и максимальное значения:\n");
     int min = input();
     int max = input();
-    if (min > max) {
+    if (min >= max) {
         printf("Ошибка: минимальное значение больше максимального.\n");
         exit(EXIT_FAILURE);
     }
@@ -66,11 +66,11 @@ void user_input_filling(int *array, const size_t n) {
 
 void print_array(const int *array, const size_t n) {
     check_array(array);
-    printf("Ваш массив:\n{");
+    printf("Ваш массив:\n[");
     for (size_t i = 0; i < n; ++i) {
         printf("%d ", array[i]);
     }
-    printf("}\n");
+    printf("]\n");
 }
 
 int* replacement(int *array, const size_t n) {

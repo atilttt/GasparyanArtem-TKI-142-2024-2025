@@ -6,7 +6,7 @@ int main(void) {
     SetConsoleOutputCP(65001); 
 
     printf("Введите размер массива\n");
-    size_t n = (size_t)pozitiv_input();
+    size_t n = pozitiv_input();
     int *array = create_array(n);
 
     printf("Выберите метод заполнения массива\n");
