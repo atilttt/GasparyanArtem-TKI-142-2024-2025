@@ -32,7 +32,6 @@ int** create_array(const size_t n, const size_t m)
     for(size_t i = 0; i < n; i++)
     { 
         array[i] = (int*)malloc(m * sizeof(int));
-        check_array(array[i]);
     }
 
     return array;
@@ -191,18 +190,22 @@ int **array_with_column_from_zeros(int **array, const size_t n, const size_t m)
     size_t current_col = 0;
 
     
-    for (size_t j = 0; j < m; j++) {
-        for (size_t i = 0; i < n; i++) {
-            new_array[i][current_col] = array[i][j]; 
+    for (size_t j = 0; j < m; j++) 
+    {
+        for (size_t i = 0; i < n; i++) 
+        {
+            new_array[i][current_col] = array[i][j];  
         }
-        current_col++; 
-        if (array[0][j] == max_element_from_array(array, n, m)) {
-            for (size_t i = 0; i < n; i++) {
-                new_array[i][current_col] = 0; 
+        current_col++;  
+        if (array[0][j] == max_element_from_array(array, n, m)) 
+        {       
+            for (size_t i = 0; i < n; i++) 
+            {
+                new_array[i][current_col] = 0;  
             }
-            current_col++;
+        current_col++; 
         }
     }
 
-    return new_array; 
+    return new_array;
 }
