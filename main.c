@@ -36,7 +36,7 @@ int main(void)
     printf("Let me remind you\n");
     print_array(array, n, m);
     int **new_array_2 = array_with_column_from_zeros(array, n, m);
-    print_array(new_array, n, m + counter(array, n, m));
+    print_array(new_array_2, n, m + counter(array, n, m));
     
     clear_array(new_array_2, n, m); 
     clear_array(array, n, m);

@@ -192,7 +192,6 @@ int **array_with_column_from_zeros(int **array, const size_t n, const size_t m)
 
     
     for (size_t j = 0; j < m; j++) {
-        // Копируем значения из старого массива в новый
         for (size_t i = 0; i < n; i++) {
             new_array[i][current_col] = array[i][j]; 
         }
