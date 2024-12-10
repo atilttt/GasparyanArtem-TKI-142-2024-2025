@@ -32,6 +32,7 @@ int** create_array(const size_t n, const size_t m)
     for(size_t i = 0; i < n; i++)
     { 
         array[i] = (int*)malloc(m * sizeof(int));
+        check_array(array[i]);
     }
 
     return array;
