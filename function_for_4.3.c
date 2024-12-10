@@ -32,6 +32,7 @@ int** create_array(const size_t n, const size_t m)
     for(size_t i = 0; i < n; i++)
     { 
         array[i] = (int*)malloc(m * sizeof(int));
+        check_array(array[i]);
     }
 
     return array;
@@ -47,6 +48,7 @@ void check_array(int **array)
 }
 
 void print_array(int **array, const size_t n, const size_t m) {
+    check_array(array);
     printf("Your array:\n");
     for (size_t i = 0; i < n; i++) {
         printf("[ ");
@@ -59,6 +61,7 @@ void print_array(int **array, const size_t n, const size_t m) {
 
 int **copy_array(int **array, const size_t n, const size_t m)
 { 
+    check_array(array);
     int **new_array = create_array(n, m);
     for (size_t i = 0; i < n; i++)
     { 
@@ -73,6 +76,7 @@ int **copy_array(int **array, const size_t n, const size_t m)
 
 void clear_array(int **array, const size_t n, const size_t m)
 { 
+    check_array(array);
     for (size_t i = 0; i < n; i++) {
         free(array[i]); 
     }
@@ -121,11 +125,12 @@ void input_filling(int **array, const size_t n, const size_t m)
 
 int **replace(int **array, const size_t n, const size_t m)
 { 
+    check_array(array);
     int **new_array = copy_array(array, n, m);
     for(size_t i = 0; i < n; i++)
     { 
         int max_element = 0;
-        for(size_t j = 1; j < m; j++)
+        for(size_t j = 0; j < m; j++)
         {
             if(new_array[i][max_element] < new_array[i][j])
             {
@@ -181,25 +186,22 @@ int **array_with_column_from_zeros(int **array, const size_t n, const size_t m)
 {
     check_array(array);  
     int k = counter(array, n, m); 
-    size_t new_m = m + k;  
-    int **new_array = create_array(n, new_m);
-    size_t current_col = 0; 
+    size_t new_m = m + k;
+    int **new_array = create_array(n, new_m); 
+    size_t current_col = 0;
 
+    
     for (size_t j = 0; j < m; j++) {
-        // Копируем элементы текущего столбца из старого массива в новый
+        // Копируем значения из старого массива в новый
         for (size_t i = 0; i < n; i++) {
-            new_array[i][current_col] = array[i][j];
+            new_array[i][current_col] = array[i][j]; 
         }
-        current_col++;  
-
-        for (size_t i = 0; i < n; i++) {
-            if (array[i][j] == max_element_from_array(array, n, m)) {
-                for (size_t i = 0; i < n; i++) {
-                    new_array[i][current_col] = 0;
-                }
-                current_col++;  
-                break; 
+        current_col++; 
+        if (array[0][j] == max_element_from_array(array, n, m)) {
+            for (size_t i = 0; i < n; i++) {
+                new_array[i][current_col] = 0; 
             }
+            current_col++;
         }
     }
 
