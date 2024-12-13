@@ -185,28 +185,32 @@ int counter(int **array, const size_t n, const size_t m)
 int **array_with_column_from_zeros(int **array, const size_t n, const size_t m)
 {
     check_array(array);  
-    int k = counter(array, n, m); 
-    size_t new_m = m + k;
-    int **new_array = create_array(n, new_m); 
-    size_t current_col = 0;
+    int k = counter(array, n, m);  
+    int max_element = max_element_from_array(array, n, m); 
+    size_t new_m = m + k; 
+    int **new_array = create_array(n, new_m);  
+    size_t current_col = 0; 
 
-    
-    for (size_t j = 0; j < m; j++) 
-    {
-        for (size_t i = 0; i < n; i++) 
+    for (size_t j = 0; j < m; j++)
+    { 
+        for (size_t i = 0; i < n; i++)
         {
-            new_array[i][current_col] = array[i][j];  
+            new_array[i][current_col] = array[i][j];
         }
-        current_col++;  
-        if (array[0][j] == max_element_from_array(array, n, m)) 
-        {       
-            for (size_t i = 0; i < n; i++) 
+        for (size_t i = 0; i < n; i++)
+        {
+            if (array[i][j] == max_element)
             {
-                new_array[i][current_col] = 0;  
+                for (size_t i = 0; i < n; i++)
+                {
+                    new_array[i][current_col + 1] = 0;  
+                }
+                current_col++;  
+                break; 
             }
-        current_col++; 
         }
+        current_col++;
     }
 
-    return new_array;
+    return new_array;  
 }
